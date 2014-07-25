@@ -4,39 +4,68 @@ using System.Collections;
 public class MenuButtonScript : MonoBehaviour 
 {
 	// Button Attributes
-	public float fButtonWidth;
-	public float fButtonHeight;
-	public string sButtonText;
+	public 	float 		fButtonWidth;														// Width of the button
+	public 	float 		fButtonHeight;														// Height of the button
+	public 	string 		sButtonText;														// Text for the button
+														
+	public 	float 		fXPositionRate;														// Range from 0.0f to 1.0f
+	public 	float 		fYPositionRate;														// Range from 0.0f to 1.0f
+														
+	public 	float 		fFontSizeRate;														// Range from 0.0f to 1.0f
+														
+	public 	GUIStyle 	guiStyle;															// GUIStyle for the button
+														
+	private Rect 		buttonRect;															// Rect position for the button
+														
+	void Awake()										
+	{											   	
+		int screenWidth, screenHeight;														// Cache screen width and height
+		screenWidth 	= Screen.width;			 	
+		screenHeight 	= Screen.height;				
+														
+		fButtonWidth 	= screenWidth / 4;													// Calculate button width based on screen width
+		fButtonHeight	= screenHeight / 12; 												// Calculate button height based on screen height
 
-	public float fXPositionRate;					// Range from 0.0f to 1.0f
-	public float fYPositionRate;					// Range from 0.0f to 1.0f
+		buttonRect = new Rect( ( screenWidth * fXPositionRate ) - ( fButtonWidth / 2.0f ), 	// Calculate the Rect position
+		                      ( screenHeight * fYPositionRate ) - ( fButtonHeight / 2.0f ),
+		                      fButtonWidth, fButtonHeight );
 
-	public float fFontSizeRate;						// Range from 0.0f to 1.0f
-
-	public GUIStyle guiStyle;
-
-
-	void Awake()
-	{
-		guiStyle.fontSize = (int)( Screen.height * fFontSizeRate );
+		guiStyle.fontSize = (int)( screenHeight * fFontSizeRate );							// Set button font size based on screen height
 	}
 
 	void Start () 
 	{
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update () 
+	{
+
 	}
 
 	void OnGUI()
 	{
-		if( GUI.Button( new Rect ( ( Screen.width * fXPositionRate ) - ( fButtonWidth / 2.0f ), ( Screen.height * fYPositionRate ) - ( fButtonHeight / 2.0f ), 
-		                          fButtonWidth, fButtonHeight ), sButtonText, guiStyle ) )
+		// If player clicked on a menu button
+		if( GUI.Button( buttonRect, sButtonText, guiStyle ) )
 		{
-			Debug.Log( "Clicked Button" );
+			switch( this.gameObject.name )													// Go to the scene that corresponds to the button clicked
+			{
+			case "PlayButton":
+				Debug.Log( "CLicked the play button" );
+				break;
+			case "OptionsButton":
+				Application.LoadLevel( "Options" );
+				break;
+			case "CreditsButton":
+				Application.LoadLevel( "Credits" );
+				break;
+			case "ExitButton":
+				Application.Quit();
+				break;
+			case "BackButton":
+				Application.LoadLevel( "MainMenu" );
+				break;
+			}
 		}
 	}
 }
