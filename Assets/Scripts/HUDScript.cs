@@ -100,11 +100,11 @@ public class HUDScript : MonoBehaviour
 	#region public void UpdateHealthBar()
 	public void UpdateHealthBar()
 	{
-		Renderer temp = GameObject.Find( "LeftHealthBar" ).GetComponent<Renderer>();
+		Renderer temp = GameObject.Find( "LeftHUDPanel" ).GetComponent<Renderer>();
 		temp.material.SetFloat( "_HealthPercentage", -( 1.0f - health ) );
 		temp.material.SetFloat( "_Inverter", -1.0f );
 
-		GameObject.Find( "RightHealthBar" ).GetComponent<Renderer>().material.SetFloat( "_HealthPercentage", shields );
+		GameObject.Find( "RightHUDPanel" ).GetComponent<Renderer>().material.SetFloat( "_HealthPercentage", shields );
 	}
 	#endregion
 
