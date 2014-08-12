@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour 
 {
+	public delegate void Destroyed( int points );
+	public static event Destroyed OnEnemyDestroyed;
+
 	public float hSpeed = 5.0f;
 	public float vSpeed = 3.0f;
 
@@ -23,6 +26,9 @@ public class PlayerScript : MonoBehaviour
 	{
 		if( other.gameObject.tag == "Enemy" )
 		{
+			if( OnEnemyDestroyed != null )
+				OnEnemyDestroyed( 50 );
+
 			Debug.Log( "Destroyed " + other.gameObject.name );
 			Destroy( other.gameObject );
 		}

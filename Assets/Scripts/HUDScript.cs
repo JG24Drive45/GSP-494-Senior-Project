@@ -41,6 +41,20 @@ public class HUDScript : MonoBehaviour
 	}
 	#endregion
 
+	#region void Start()
+	void Start()
+	{
+		PlayerScript.OnEnemyDestroyed += UpdateScore;
+	}
+	#endregion
+
+	#region void OnDestroy()
+	void OnDestroy()
+	{
+		PlayerScript.OnEnemyDestroyed -= UpdateScore;
+	}
+	#endregion
+
 	#region void Update()
 	void Update () 
 	{
