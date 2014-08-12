@@ -32,6 +32,14 @@ public class DisplayNarration : MonoBehaviour
 		return (Texture)Resources.Load(pFileName);
 	}
 
+	private void AddNarr(SceneNarration pScene, string pImg, string pSpeaker, string pNarration)
+	{
+		pScene.narration.Add (new NarrativePiece (GrabImg (pImg),
+		                                         pSpeaker,
+		                                         pNarration)
+		                      );
+	}
+
 	private Rect speakerBox;
 	private Rect narrationBox;
 	private Rect imageBox;
@@ -59,27 +67,29 @@ public class DisplayNarration : MonoBehaviour
 		imageBox.xMax = imageBox.xMin + (Screen.width / 5);
 		imageBox.yMax = speakerBox.yMin;
 		imageBox.yMin = imageBox.yMax - (Screen.height / 2);
-		scene1.narration.Add (new NarrativePiece(GrabImg ("Craine Sprite"),
-		                                         "Staff Sergeant Jennifer Greenheart",
-		                                        "Get to work, welp!")
-		        );
-		scene1.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
-		                                          "Private Dakota Grey",
-		                                         "Yes, ma'am!")
-		        );
+
+		AddNarr (scene1,
+		         "Craine Sprite",
+		         "Staff Sergeant Jennifer Greenheart",
+		         "Get to work, welp!");
+		AddNarr (scene1,
+		         "Craine Sprite",
+				 "Private Dakota Grey",
+				 "Yes, ma'am!");
 		gameNarrative.Add (scene1);
-		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
-		                                          "Staff Sergeant Dakota Grey",
-		                                        "Wait.. I'm in charge now..? MUAHAHAHAHA. LICK MY BOOT, PRIVATE!")
-				);
-		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
-		                                          "Private Jennifer Green",
-		                                        ";_;")
-				);
-		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
-		                                          "Narrator",
-		                                         "Get your fanfic pens out..")
-				);
+
+		AddNarr (scene2,
+		         "Craine Sprite",
+		         "Staff Sergeant Dakota Grey",
+		         "Wait.. I'm in charge now..? MUAHAHAHAHA. LICK MY BOOT, PRIVATE!");
+		AddNarr (scene2,
+		         "Craine Sprite",
+		         "Private Jennifer Green",
+		         ";_;");
+		AddNarr (scene2,
+		         "Craine Sprite",
+		         "Narrator",
+		         "Get your fanfic pens out..");
 		gameNarrative.Add (scene2);
 	}
 	
