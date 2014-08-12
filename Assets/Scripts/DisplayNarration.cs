@@ -25,8 +25,8 @@ class SceneNarration
 public class DisplayNarration : MonoBehaviour
 {
 
-	public Rect speakerBox;
-	public Rect narrationBox;
+	private Rect speakerBox;
+	private Rect narrationBox;
 
 	public GUIStyle boxStyle;
 
@@ -39,6 +39,14 @@ public class DisplayNarration : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		narrationBox.xMin = 0;
+		narrationBox.xMax = Screen.width;
+		narrationBox.yMin = (Screen.height - (Screen.height / 5));
+		narrationBox.yMax = Screen.height;
+		speakerBox.xMin = 0;
+		speakerBox.xMax = Screen.width;
+		speakerBox.yMin = narrationBox.yMin - (Screen.height / 15);
+		speakerBox.yMax = speakerBox.yMin + (Screen.height / 20);
 		scene1.narration.Add (new NarrativePiece("Staff Sergeant Jennifer Greenheart",
 		                                        "Get to work, welp!")
 		        );
