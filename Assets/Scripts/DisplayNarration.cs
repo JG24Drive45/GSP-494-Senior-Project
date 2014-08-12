@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 class NarrativePiece
 {
+	public Texture image;
 	public string speaker;
 	public string narration;
-	public NarrativePiece(string pSpeaker, string pNarration)
+	public NarrativePiece(Texture pImg, string pSpeaker, string pNarration)
 	{
+		this.image = pImg;
 		this.speaker = pSpeaker;
 		this.narration = pNarration;
 	}
@@ -25,8 +27,14 @@ class SceneNarration
 public class DisplayNarration : MonoBehaviour
 {
 
+	private Texture GrabImg(string pFileName)
+	{
+		return (Texture)Resources.Load(pFileName);
+	}
+
 	private Rect speakerBox;
 	private Rect narrationBox;
+	private Rect imageBox;
 
 	public GUIStyle boxStyle;
 
@@ -47,20 +55,29 @@ public class DisplayNarration : MonoBehaviour
 		speakerBox.xMax = Screen.width;
 		speakerBox.yMin = narrationBox.yMin - (Screen.height / 15);
 		speakerBox.yMax = speakerBox.yMin + (Screen.height / 20);
-		scene1.narration.Add (new NarrativePiece("Staff Sergeant Jennifer Greenheart",
+		imageBox.xMin = Screen.width / 20;
+		imageBox.xMax = imageBox.xMin + (Screen.width / 5);
+		imageBox.yMax = speakerBox.yMin;
+		imageBox.yMin = imageBox.yMax - (Screen.height / 2);
+		scene1.narration.Add (new NarrativePiece(GrabImg ("Craine Sprite"),
+		                                         "Staff Sergeant Jennifer Greenheart",
 		                                        "Get to work, welp!")
 		        );
-		scene1.narration.Add (new NarrativePiece ("Private Dakota Grey",
+		scene1.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
+		                                          "Private Dakota Grey",
 		                                         "Yes, ma'am!")
 		        );
 		gameNarrative.Add (scene1);
-		scene2.narration.Add (new NarrativePiece ("Staff Sergeant Dakota Grey",
+		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
+		                                          "Staff Sergeant Dakota Grey",
 		                                        "Wait.. I'm in charge now..? MUAHAHAHAHA. LICK MY BOOT, PRIVATE!")
 				);
-		scene2.narration.Add (new NarrativePiece ("Private Jennifer Green",
+		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
+		                                          "Private Jennifer Green",
 		                                        ";_;")
 				);
-		scene2.narration.Add (new NarrativePiece ("Narrator",
+		scene2.narration.Add (new NarrativePiece (GrabImg ("Craine Sprite"),
+		                                          "Narrator",
 		                                         "Get your fanfic pens out..")
 				);
 		gameNarrative.Add (scene2);
@@ -74,7 +91,7 @@ public class DisplayNarration : MonoBehaviour
 	void OnGUI()
 	{
 		GUI.Label (speakerBox, gameNarrative[sceneID].narration[narrativeIndex].speaker, boxStyle);
-		//GUI.Label (narrationBox, sceneNarrative[narrativeIndex].narration, boxStyle);
+		GUI.DrawTexture (imageBox, gameNarrative [sceneID].narration [narrativeIndex].image);
 		if (GUI.Button (narrationBox, gameNarrative[sceneID].narration[narrativeIndex].narration, boxStyle))
 		{
 			if (narrativeIndex+1 < gameNarrative[sceneID].narration.Count)
