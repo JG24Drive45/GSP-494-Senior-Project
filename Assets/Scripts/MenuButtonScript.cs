@@ -50,16 +50,26 @@ public class MenuButtonScript : MonoBehaviour
 		{
 			switch( this.gameObject.name )													// Go to the scene that corresponds to the button clicked
 			{
-			case "PlayButton":
-				Debug.Log( "CLicked the play button" );
+			case "NewGameButton":
+				Debug.Log( "CLicked the new game button" );
+				break;
+			case "InstructionsButton":
+				Debug.Log( "Clicked the instructions buttons" );
+				Application.LoadLevel( "Instructions" );
+				break;
+			case "LoadGameButton":
+				Debug.Log( "Clicked the load game button" );
 				break;
 			case "OptionsButton":
+				Debug.Log( "Clicked the Options button" );
 				Application.LoadLevel( "Options" );
 				break;
 			case "CreditsButton":
+				Debug.Log( "Clicked the credits button" );
 				Application.LoadLevel( "Credits" );
-				break;
+				break;			
 			case "ExitButton":
+				Debug.Log( "Clicked the exit button" );
 				Application.Quit();
 				break;
 			case "BackButton":

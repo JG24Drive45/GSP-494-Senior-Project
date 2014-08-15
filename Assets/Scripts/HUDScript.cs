@@ -60,43 +60,19 @@ public class HUDScript : MonoBehaviour
 	{
 		if(Input.GetKey(KeyCode.Keypad1))						// Testing
 		{
-			if( health > 0.0f )
-			{
-				health -= 0.01f;
-				if( health < 0.0f )
-					health = 0.0f;
-				UpdateHealthBar();
-			}
+			TakeHealthDamage( 0.05f );
 		}
 		else if (Input.GetKey(KeyCode.Keypad3))				// Testing
 		{
-			if( shields > 0.0f )
-			{
-				shields -= 0.01f;
-				if( shields < 0.0f )
-					shields = 0.0f;
-				UpdateHealthBar();
-			}
+			TakeShieldDamage( 0.1f );
 		}
 		else if( Input.GetKey(KeyCode.Keypad4))
 		{
-			if( health < 1.0f )
-			{
-				health += 0.01f;
-				if( health > 1.0f )
-					health = 1.0f;
-				UpdateHealthBar();
-			}
+			TakeHealthDamage( 0.05f );
 		}
 		else if( Input.GetKey(KeyCode.Keypad6))
 		{
-			if( shields < 1.0f )
-			{
-				shields += 0.01f;
-				if( shields > 1.0f )
-					shields = 1.0f;
-				UpdateHealthBar();
-			}
+			TakeShieldDamage( 0.1f );
 		}
 
 		if( Input.GetKeyDown( KeyCode.Return ) )
@@ -111,14 +87,31 @@ public class HUDScript : MonoBehaviour
 	}
 	#endregion
 
-	#region public void UpdateHealthBar()
-	public void UpdateHealthBar()
+	#region public void TakeHealthDamage( float damage )
+	public void TakeHealthDamage( float damage )
 	{
-		Renderer temp = GameObject.Find( "LeftHUDPanel" ).GetComponent<Renderer>();
-		temp.material.SetFloat( "_HealthPercentage", -( 1.0f - health ) );
-		temp.material.SetFloat( "_Inverter", -1.0f );
+		health -= damage;
+		if( health > 0.0f )
+		{
+			Renderer temp = GameObject.Find( "LeftHUDPanel" ).GetComponent<Renderer>();
+			temp.material.SetFloat( "_HealthPercentage", -( 1.0f - health ) );
+			temp.material.SetFloat( "_Inverter", -1.0f );
+		}
+		else
+		{
+			// TODO: Kill Player
+		}
+	}
+	#endregion
 
-		GameObject.Find( "RightHUDPanel" ).GetComponent<Renderer>().material.SetFloat( "_HealthPercentage", shields );
+	#region public void TakeShieldDamage( float damage )
+	public void TakeShieldDamage( float damage )
+	{
+		shields -= damage;
+		if( shields > 0.0f )
+		{
+			GameObject.Find( "RightHUDPanel" ).GetComponent<Renderer>().material.SetFloat( "_HealthPercentage", shields );
+		}
 	}
 	#endregion
 
