@@ -28,13 +28,15 @@ public class PlayerScript : MonoBehaviour
 
 	void OnCollisionEnter2D( Collision2D other )
 	{
-		if( other.gameObject.tag == "Enemy" )
+		switch( other.gameObject.tag )
 		{
+		case "Enemy":
 			if( OnEnemyDestroyed != null )
 				OnEnemyDestroyed( 50 );
 
 			Debug.Log( "Destroyed " + other.gameObject.name );
 			Destroy( other.gameObject );
+			break;
 		}
 	}
 }
