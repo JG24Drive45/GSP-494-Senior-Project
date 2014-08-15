@@ -9,7 +9,11 @@ public class PlayerScript : MonoBehaviour
 	public float hSpeed = 5.0f;
 	public float vSpeed = 3.0f;
 
-	void Start () {
+	public int health	= 100;
+	public int shield	= 100;
+
+	void Start () 
+	{
 		
 	}
 
