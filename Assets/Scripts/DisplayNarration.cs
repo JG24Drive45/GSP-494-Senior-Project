@@ -29,7 +29,7 @@ public class DisplayNarration : MonoBehaviour
 
 	private Texture GrabImg(string pFileName)
 	{
-		return (Texture)Resources.Load(pFileName);
+		return (Texture)Resources.Load("Art/Character Profile Images/" + pFileName);
 	}
 
 	private void AddNarr(SceneNarration pScene, string pImg, string pSpeaker, string pNarration)
