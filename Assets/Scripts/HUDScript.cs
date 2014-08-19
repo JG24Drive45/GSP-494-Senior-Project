@@ -10,34 +10,42 @@ public class HUDScript : MonoBehaviour
 	public int score		= 0;							// Testing
 	public int debris		= 0;							// Testing
 
-	public GUIStyle guiStyle;
+	public int fontSize		= 12;
 
 	// Private	
-	private Rect scoreRect;
-	private Rect debrisRect;
-
-	private float fLabelWidthRate	= 0.165f;
-	private float fLabelHeightRate	= 0.075f;
-
-	private float fFontSizeRate		= 0.05f;
+	private float fFontSizeRate		= 0.055f;
 
 	#region void Awake()
 	void Awake()
 	{
 		int iScreenWidth	 = Screen.width;
 		int iScreenHeight	 = Screen.height;
-		int labelWidth, labelHeight;
-
-		//Calculate the label size based on screen size
-		labelWidth	= (int)( fLabelWidthRate * Screen.width );
-		labelHeight	= (int)( fLabelHeightRate * Screen.height );
-
-		// Calculate the Rects based on screen size
-		scoreRect = new Rect( 0.1f * iScreenWidth, 0.03f * iScreenHeight, labelWidth, labelHeight );
-		debrisRect = new Rect ( iScreenWidth * 0.9f - labelWidth, 0.03f * iScreenHeight, labelWidth, labelHeight );
 
 		// Calculate the font based on screen size
-		guiStyle.fontSize = (int)( fFontSizeRate * iScreenHeight );
+		fontSize = (int)( fFontSizeRate * iScreenHeight );
+
+		// Calculate the positions of the points and debris GUIs
+		GameObject p = GameObject.Find( "PointsGUITexture" );
+		p.transform.localPosition = new Vector3( 0.15f, 0.91f, 0.0f );
+		GameObject d = GameObject.Find( "DebrisGUITexture" );
+		d.transform.localPosition = new Vector3( 0.855f, 0.91f, 0.0f );
+
+		// Calculate the texture size of the points and debris GUIs
+		int w = (int)( iScreenWidth * 0.3f );
+		int h = (int)( iScreenHeight * 0.15f );
+		p.guiTexture.pixelInset = new Rect( -( w / 2 ), -( h / 2 ), w, h );
+		d.guiTexture.pixelInset = new Rect( -( w / 2 ), -( h / 2 ), w, h );
+
+		// Set the GUIText for the points and debris
+		p = GameObject.Find( "PointsGUIText" );
+		p.transform.localPosition = new Vector3( 0.03f, 0.912f, 0.5f );
+		p.guiText.fontSize = fontSize;
+		p.guiText.text = "Points " + score;
+
+		d = GameObject.Find( "DebrisGUIText" );
+		d.transform.localPosition = new Vector3( 0.735f, 0.912f, 0.5f );
+		d.guiText.fontSize = fontSize;
+		d.guiText.text = "Debris " + debris;
 	}
 	#endregion
 
@@ -119,6 +127,7 @@ public class HUDScript : MonoBehaviour
 	public void UpdateScore( int points )
 	{
 		score += points;									// Update the variable
+		GameObject.Find( "PointsGUIText" ).guiText.text = "Score " + score;
 	}
 	#endregion
 
@@ -126,14 +135,7 @@ public class HUDScript : MonoBehaviour
 	public void UpdateDebris( int scrap )
 	{
 		debris += scrap;
-	}
-	#endregion
-
-	#region void OnGUI()
-	void OnGUI()
-	{
-		GUI.Label( scoreRect, score.ToString(), guiStyle );			// Display the score
-		GUI.Label( debrisRect, debris.ToString(), guiStyle );			// Display the debris count
+		GameObject.Find( "DebrisGUIText" ).guiText.text = "Debris " + debris;
 	}
 	#endregion
 }
