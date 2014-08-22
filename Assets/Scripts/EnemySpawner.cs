@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
 		enemyToSpawn = 0;
 		xMin = 25;
 		xMax = Screen.width;
-		SpawnEnemies();
+		StartCoroutine("SpawnEnemies");
 	}
 
 	void Update ()
@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	public void SpawnEnemies()
+	public IEnumerator SpawnEnemies()
 	{
 		while(spawnEnemies)
 		{
@@ -46,34 +46,34 @@ public class EnemySpawner : MonoBehaviour
 			switch(enemyToSpawn)
 			{
 			case 5:
-				CreateEnemy(Enemy5);
+				GameObject enemyObject1 = ( GameObject )Instantiate( Enemy5, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
+				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
+				                                                                       -1.0f ), Quaternion.identity );
 				break;
 			case 4:
-				CreateEnemy(Enemy4);
+				GameObject enemyObject2 = ( GameObject )Instantiate( Enemy4, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
+				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
+				                                                                       -1.0f ), Quaternion.identity );
 				break;
 			case 3:
-				CreateEnemy(Enemy3);
+				GameObject enemyObject3 = ( GameObject )Instantiate( Enemy3, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
+				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
+				                                                                       -1.0f ), Quaternion.identity );
 				break;
 			case 2:
-				CreateEnemy(Enemy2);
+				GameObject enemyObject4 = ( GameObject )Instantiate( Enemy2, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
+				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
+				                                                                       -1.0f ), Quaternion.identity );
 				break;
 			case 1:
-				CreateEnemy(Enemy1);
+				GameObject enemyObject5 = ( GameObject )Instantiate( Enemy1, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
+				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
+				                                                                       -1.0f ), Quaternion.identity );
 				break;
 			default:
 				break;
 			}
-			StartCoroutine("CreateEnemy");
+			yield return new WaitForSeconds(1.5f);
 		}
 	}
-
-	public IEnumerator CreateEnemy(GameObject enemy)
-	{
-		Debug.Log("Enemy Created");
-		GameObject enemyObject = ( GameObject )Instantiate( enemy, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
-		                                                                             myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-		                                                                             -1.0f ), Quaternion.identity );
-		yield return new WaitForSeconds(1.5f);
-	}
-
 }
