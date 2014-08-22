@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e057f4f479e49b446bff880f6301bb6f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Enemy1: {fileID: 100000, guid: 0770d0251626a69468c1ed47143f73e0, type: 2}
+  - Enemy2: {fileID: 100000, guid: b70a86b46cb90094aadcf6ce48819fd6, type: 2}
+  - Enemy3: {fileID: 100000, guid: b402657acd4b6b54db6658813187cc61, type: 2}
+  - Enemy4: {fileID: 100000, guid: a0ed8ddefa7f3b145bab526b556e8bfa, type: 2}
+  - Enemy5: {fileID: 100000, guid: 72ed8f74709164e47a9118b331e0fe54, type: 2}
+  - _PlayerScript: {instanceID: 0}
+  - myCamera: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
