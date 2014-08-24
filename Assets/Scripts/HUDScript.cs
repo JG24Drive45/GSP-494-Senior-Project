@@ -89,11 +89,6 @@ public class HUDScript : MonoBehaviour
 		{
 			UpdateScore( 10 );
 		}
-
-		if( Input.GetKeyDown( KeyCode.Backspace ) )
-		{
-			UpdateDebris( 50 );
-		}
 	}
 	#endregion
 

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PlayerBullet : MonoBehaviour 
 {
+	public delegate void AttackEnemy( int hitPoints );
+	public static event AttackEnemy OnEnemyAttacked;
+
 	protected Vector3 	velocity;
 	protected float		speed;
 	protected int		damage;
@@ -30,9 +33,11 @@ public class PlayerBullet : MonoBehaviour
 		switch( other.gameObject.tag )
 		{
 		case "Enemy":
-			Destroy( this.gameObject );
 			Debug.Log( "Shot Enemy" );
 			// TODO: Deal hit points to enemy
+			if( OnEnemyAttacked != null )
+				OnEnemyAttacked( damage );
+			Destroy( this.gameObject );
 			break;
 		}
 	}

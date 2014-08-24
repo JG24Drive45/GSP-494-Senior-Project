@@ -30,6 +30,16 @@ public class PlayerScript : MonoBehaviour
 		transform.position += new Vector3( Input.GetAxis( "Horizontal" ) * hSpeed * Time.deltaTime,
 		                                   Input.GetAxis( "Vertical"   ) * vSpeed * Time.deltaTime, 0.0f );
 
+		// Bounds Checking
+		if( transform.position.x < -6.0f )
+			transform.position = new Vector3( -6.0f, transform.position.y, 0.0f );
+		if( transform.position.x > 6.0f )
+			transform.position = new Vector3( 6.0f, transform.position.y, 0.0f );
+		if( transform.position.y < -4.3f )
+			transform.position = new Vector3( transform.position.x, -4.3f, 0.0f );
+		if( transform.position.y > 2.0f )
+			transform.position = new Vector3( transform.position.x, 2.0f, 0.0f );
+
 		// Did the player shoot?
 		if( Input.GetKeyDown( KeyCode.Space ) )
 		{

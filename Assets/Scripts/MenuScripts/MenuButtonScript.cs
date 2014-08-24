@@ -35,6 +35,7 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the play game button" );
+			Application.LoadLevel( "LevelSelect" );
 			break;
 		case "LoadGameButton":
 			if( onMouseClick != null )
