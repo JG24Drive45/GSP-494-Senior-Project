@@ -6,6 +6,9 @@ public class PlayerScript : MonoBehaviour
 	public delegate void Destroyed( int points );
 	public static event Destroyed OnEnemyDestroyed;
 
+	public delegate void Debris( int debrisValue );
+	public static event Debris OnDebrisCollected;
+
 	public float hSpeed = 5.0f;
 	public float vSpeed = 3.0f;
 
@@ -41,8 +44,13 @@ public class PlayerScript : MonoBehaviour
 		case "Enemy":
 			if( OnEnemyDestroyed != null )
 				OnEnemyDestroyed( 50 );
-
 			Debug.Log( "Destroyed " + other.gameObject.name );
+			Destroy( other.gameObject );
+			break;
+		case "Debris":
+			if( OnDebrisCollected != null )
+				OnDebrisCollected( other.gameObject.GetComponent<DebrisScript>().GetDebrisPointValue() );
+			Debug.Log( "Debris Collected" );
 			Destroy( other.gameObject );
 			break;
 		}

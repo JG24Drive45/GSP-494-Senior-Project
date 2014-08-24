@@ -53,6 +53,7 @@ public class HUDScript : MonoBehaviour
 	void Start()
 	{
 		PlayerScript.OnEnemyDestroyed += UpdateScore;
+		PlayerScript.OnDebrisCollected += UpdateDebris;
 	}
 	#endregion
 
@@ -60,6 +61,7 @@ public class HUDScript : MonoBehaviour
 	void OnDestroy()
 	{
 		PlayerScript.OnEnemyDestroyed -= UpdateScore;
+		PlayerScript.OnDebrisCollected -= UpdateDebris;
 	}
 	#endregion
 
@@ -132,9 +134,9 @@ public class HUDScript : MonoBehaviour
 	#endregion
 
 	#region public void UpdateDebris()
-	public void UpdateDebris( int scrap )
+	public void UpdateDebris( int debrisVal )
 	{
-		debris += scrap;
+		debris += debrisVal;
 		GameObject.Find( "DebrisGUIText" ).guiText.text = "Debris " + debris;
 	}
 	#endregion
