@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour
 	public int health	= 100;
 	public int shield	= 100;
 
+	public GameObject bullet1;
+
 	void Start () 
 	{
 		
@@ -24,6 +26,12 @@ public class PlayerScript : MonoBehaviour
 		// Update position
 		transform.position += new Vector3( Input.GetAxis( "Horizontal" ) * hSpeed * Time.deltaTime,
 		                                   Input.GetAxis( "Vertical"   ) * vSpeed * Time.deltaTime, 0.0f );
+
+		// Did the player shoot?
+		if( Input.GetKeyDown( KeyCode.Space ) )
+		{
+			Instantiate( bullet1, GameObject.Find( "PlayerMuzzle" ).transform.position, Quaternion.identity );
+		}
 	}
 
 	void OnCollisionEnter2D( Collision2D other )
