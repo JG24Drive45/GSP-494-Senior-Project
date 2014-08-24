@@ -21,6 +21,7 @@ public class Enemy1AI : MonoBehaviour
 		myCamera = Camera.main;
 		xMin = 25;
 		xMax = Screen.width - 25;
+		moving = false;
 		SetDestination();
 	}
 
