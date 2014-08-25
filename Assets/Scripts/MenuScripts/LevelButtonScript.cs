@@ -3,15 +3,22 @@ using System.Collections;
 
 public class LevelButtonScript : MonoBehaviour 
 {
+	public int levelNum;
+	public float levelTime;
+	public bool isLevelBeaten	= false;
 
-	// Use this for initialization
-	void Start () {
-	
+	void Awake()
+	{
+		levelTime = 60 + ( (levelNum - 1) % 10 ) * 10;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Start () 
+	{
+		isLevelBeaten = PlayerSettingsScript.GetInstance.levelStatus[levelNum - 1];
+	}
+
+	void Update () 
+	{
 	}
 
 	void OnMouseUp()
@@ -20,8 +27,18 @@ public class LevelButtonScript : MonoBehaviour
 		{
 		case "Level1Button":
 			Debug.Log( "Clicked Level 1 Buton" );
+			PlayerSettingsScript.GetInstance.levelNum = levelNum;
+			PlayerSettingsScript.GetInstance.levelTime = levelTime;
 			Application.LoadLevel( "Jills Test Level" );
 			break;
+		}
+	}
+
+	void SetLevelBeaten( int levelNum )
+	{
+		if( this.levelNum == levelNum )
+		{
+			isLevelBeaten = true;
 		}
 	}
 }

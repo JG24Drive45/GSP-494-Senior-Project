@@ -12,6 +12,9 @@ public class PlayerSettingsScript : MonoBehaviour
 
 	public int levelNum			= 0;										// What level is the player currently on
 	public int narrativeNum		= 0;										// What narrative the player is currently on
+	public float levelTime		= 0;
+
+	public bool[] levelStatus 	= new bool[10];
 
 	public enum PlayerState { MAINMENU, LEVEL, NARRATIVE, UPGRADE };
 	PlayerState state;
@@ -38,8 +41,27 @@ public class PlayerSettingsScript : MonoBehaviour
 			instance = this;
 		}
 
-		state = PlayerState.MAINMENU;
-
 		DontDestroyOnLoad( this.gameObject );
+	}
+
+	void Start()
+	{
+		PlayerScript.OnLevelBeaten += SetLevelBeaten;
+
+		state = PlayerState.MAINMENU;
+		for( int i = 0; i < 10; i++ )
+		{
+			levelStatus[i] = false;
+		}
+	}
+
+	void OnDestroy()
+	{
+		PlayerScript.OnLevelBeaten -= SetLevelBeaten;
+	}
+
+	void SetLevelBeaten( int levelNum )
+	{
+		levelStatus[levelNum - 1] = true;
 	}
 }

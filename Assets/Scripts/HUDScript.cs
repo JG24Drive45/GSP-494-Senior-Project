@@ -54,6 +54,8 @@ public class HUDScript : MonoBehaviour
 	{
 		PlayerScript.OnEnemyCollision += TakeShieldDamage;
 		PlayerScript.OnDebrisCollected += UpdateDebris;
+		PlayerScript.OnGetDebrisVal += GetDebris;
+		PlayerScript.OnGetPointsVal += GetPoints;
 	}
 	#endregion
 
@@ -62,6 +64,8 @@ public class HUDScript : MonoBehaviour
 	{
 		PlayerScript.OnEnemyCollision -= TakeShieldDamage;
 		PlayerScript.OnDebrisCollected -= UpdateDebris;
+		PlayerScript.OnGetDebrisVal -= GetDebris;
+		PlayerScript.OnGetPointsVal -= GetPoints;
 	}
 	#endregion
 
@@ -161,6 +165,20 @@ public class HUDScript : MonoBehaviour
 			TakeShieldDamage( 0.0f );
 		}
 
+	}
+	#endregion
+
+	#region public int GetPoints()
+	public int GetPoints()
+	{
+		return score;
+	}
+	#endregion
+
+	#region public int GetDebris()
+	public int GetDebris()
+	{
+		return debris;
 	}
 	#endregion
 }

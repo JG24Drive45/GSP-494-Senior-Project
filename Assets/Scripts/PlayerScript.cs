@@ -12,6 +12,13 @@ public class PlayerScript : MonoBehaviour
 	public delegate void KeyPress();
 	public static event KeyPress OnPlayerShooting;
 
+	public delegate void LevelBeaten( int levelNum );
+	public static event LevelBeaten OnLevelBeaten;
+
+	public delegate int GetPoints();
+	public static event GetPoints OnGetPointsVal;
+	public static event GetPoints OnGetDebrisVal;
+
 	public float hSpeed;
 	public float vSpeed;
 
@@ -49,6 +56,25 @@ public class PlayerScript : MonoBehaviour
 			if( OnPlayerShooting != null )
 				OnPlayerShooting();
 			Instantiate( bullet1, GameObject.Find( "PlayerMuzzle" ).transform.position, Quaternion.identity );
+		}
+
+		// Count down level time
+		if( PlayerSettingsScript.GetInstance.levelTime <= 0.0f )
+		{
+			// Set the current level to beaten
+			if( OnLevelBeaten != null )
+				OnLevelBeaten( PlayerSettingsScript.GetInstance.levelNum );
+			// Add the player points and debris values to the player settings
+			if( OnGetPointsVal != null )
+				PlayerSettingsScript.GetInstance.totalScore += OnGetPointsVal();
+			if( OnGetDebrisVal != null )
+				PlayerSettingsScript.GetInstance.totalDebris += OnGetDebrisVal();
+			// Go back to the main menu
+			Application.LoadLevel( "MainMenu" );
+		}
+		else
+		{
+			PlayerSettingsScript.GetInstance.levelTime -= Time.deltaTime;
 		}
 	}
 
