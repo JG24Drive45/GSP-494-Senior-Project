@@ -9,8 +9,7 @@ public class PlayerBullet : MonoBehaviour
 	protected Vector3 	velocity;
 	protected float		speed;
 	protected int		damage;
-
-	// Use this for initialization
+	
 	public virtual void Start () 
 	{
 	

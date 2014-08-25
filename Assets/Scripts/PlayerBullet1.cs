@@ -8,7 +8,7 @@ public class PlayerBullet1 : PlayerBullet {
 	{
 		velocity 	= new Vector3( 0.0f, 1.0f, 0.0f );
 		speed		= 10.0f;
-		damage		= 5;
+		damage		= PlayerSettingsScript.GetInstance.weaponStrength;
 	}
 	
 	// Update is called once per frame
