@@ -31,6 +31,7 @@ public class SoundControl : MonoBehaviour
 	
 	public AudioClip onHover;
 	public AudioClip onClick;
+	public AudioClip playerBulletFire;
 	
 	public static SoundControl GetInstance
 	{
@@ -57,12 +58,14 @@ public class SoundControl : MonoBehaviour
 		// Subscribe to events
 		MenuButtonScript.onMouseOver += PlayOnHover;
 		MenuButtonScript.onMouseClick += PlayOnClick;
+		PlayerScript.OnPlayerShooting += PlayPlayerFire;
 	}
 
 	void OnDestroy()
 	{
 		MenuButtonScript.onMouseOver -= PlayOnHover;
 		MenuButtonScript.onMouseClick -= PlayOnClick;
+		PlayerScript.OnPlayerShooting -= PlayPlayerFire;
 	}
 
 	void PlayOnHover()
@@ -73,5 +76,10 @@ public class SoundControl : MonoBehaviour
 	void PlayOnClick()
 	{
 		audio.PlayOneShot( onClick );
+	}
+
+	void PlayPlayerFire()
+	{
+		audio.PlayOneShot (playerBulletFire);
 	}
 }
