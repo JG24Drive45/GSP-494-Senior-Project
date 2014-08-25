@@ -52,7 +52,7 @@ public class HUDScript : MonoBehaviour
 	#region void Start()
 	void Start()
 	{
-		PlayerScript.OnEnemyDestroyed += UpdateScore;
+		PlayerScript.OnEnemyCollision += TakeShieldDamage;
 		PlayerScript.OnDebrisCollected += UpdateDebris;
 	}
 	#endregion
@@ -60,7 +60,7 @@ public class HUDScript : MonoBehaviour
 	#region void OnDestroy()
 	void OnDestroy()
 	{
-		PlayerScript.OnEnemyDestroyed -= UpdateScore;
+		PlayerScript.OnEnemyCollision -= TakeShieldDamage;
 		PlayerScript.OnDebrisCollected -= UpdateDebris;
 	}
 	#endregion
@@ -68,27 +68,13 @@ public class HUDScript : MonoBehaviour
 	#region void Update()
 	void Update () 
 	{
-		if(Input.GetKey(KeyCode.Keypad1))						// Testing
-		{
-			TakeHealthDamage( 0.05f );
-		}
-		else if (Input.GetKey(KeyCode.Keypad3))				// Testing
-		{
-			TakeShieldDamage( 0.1f );
-		}
-		else if( Input.GetKey(KeyCode.Keypad4))
-		{
-			TakeHealthDamage( 0.05f );
-		}
-		else if( Input.GetKey(KeyCode.Keypad6))
-		{
-			TakeShieldDamage( 0.1f );
-		}
-
 		if( Input.GetKeyDown( KeyCode.Return ) )
 		{
 			UpdateScore( 10 );
 		}
+
+		// Regenerate shields
+		RegenerateShield();
 	}
 	#endregion
 
@@ -96,15 +82,17 @@ public class HUDScript : MonoBehaviour
 	public void TakeHealthDamage( float damage )
 	{
 		health -= damage;
-		if( health > 0.0f )
+		if( health >= 0.0f )
 		{
 			Renderer temp = GameObject.Find( "LeftHUDPanel" ).GetComponent<Renderer>();
 			temp.material.SetFloat( "_HealthPercentage", -( 1.0f - health ) );
 			temp.material.SetFloat( "_Inverter", -1.0f );
 		}
-		else
+
+		// TODO: Kill Player
+		if( health <= 0.0f )
 		{
-			// TODO: Kill Player
+			// Player is dead
 		}
 	}
 	#endregion
@@ -112,11 +100,25 @@ public class HUDScript : MonoBehaviour
 	#region public void TakeShieldDamage( float damage )
 	public void TakeShieldDamage( float damage )
 	{
-		shields -= damage;
-		if( shields > 0.0f )
+		float shieldDamage, healthDamage;
+		shieldDamage = healthDamage = 0.0f;
+
+		if( shields >= damage )
+			shieldDamage = damage;
+		else
+		{
+			shieldDamage = shields ;
+			healthDamage = damage - shields;
+		}
+
+		shields -= shieldDamage;
+
+		if( shields >= 0.0f )
 		{
 			GameObject.Find( "RightHUDPanel" ).GetComponent<Renderer>().material.SetFloat( "_HealthPercentage", shields );
 		}
+
+		TakeHealthDamage( healthDamage );
 	}
 	#endregion
 
@@ -128,11 +130,25 @@ public class HUDScript : MonoBehaviour
 	}
 	#endregion
 
-	#region public void UpdateDebris()
+	#region public void UpdateDebris( int debrisVal )
 	public void UpdateDebris( int debrisVal )
 	{
 		debris += debrisVal;
 		GameObject.Find( "DebrisGUIText" ).guiText.text = "Debris " + debris;
 	}
 	#endregion
+
+	public void RegenerateShield()
+	{
+		if( shields < 1.0f )
+		{
+			shields += 0.0005f;
+			if( shields > 1.0f )
+				shields = 1.0f;
+
+			// Update the shield bar
+			TakeShieldDamage( 0.0f );
+		}
+
+	}
 }
