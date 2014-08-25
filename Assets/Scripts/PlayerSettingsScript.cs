@@ -5,7 +5,7 @@ public class PlayerSettingsScript : MonoBehaviour
 {
 	public int totalScore		= 0;
 	public int totalDebris		= 0;
-	public Vector2 shipSpeed	= new Vector2( 5.0f, 3.0f ); 
+	public float shipSpeed		= 5.0f;
 
 	private static PlayerSettingsScript instance = null;
 	

@@ -19,9 +19,7 @@ public class PlayerScript : MonoBehaviour
 
 	void Start () 
 	{
-		hSpeed = PlayerSettingsScript.GetInstance.shipSpeed.x;
-		vSpeed = PlayerSettingsScript.GetInstance.shipSpeed.y;
-
+		hSpeed = vSpeed = PlayerSettingsScript.GetInstance.shipSpeed;
 	}
 
 	void Update () {
