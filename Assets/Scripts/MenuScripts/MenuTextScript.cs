@@ -36,9 +36,10 @@ public class MenuTextScript : MonoBehaviour
 						"for Main Menu and HUD artwork";
 
 		menuText[1] = 	"Use the arrow or WASD\n" +
-						"keys to move your ship\n\n\n" +
+						"keys to move your ship\n\n" +
 						"Use the spacebar\n" +
-						"to shoot";
+						"to shoot\n\n" +
+						"Collect debris along the way";
 
 		switch( this.gameObject.name )
 		{
@@ -65,7 +66,7 @@ public class MenuTextScript : MonoBehaviour
 		guiStyle.fontStyle = FontStyle.Normal;
 
 		// Used for drop shadow
-		blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 153, 103 );
+		blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 155, 105 );
 		// Use for foreground text
 		whiteTextRect = new Rect( width / 2 - 75, height / 2 - 50, 150, 100 );
 	}
