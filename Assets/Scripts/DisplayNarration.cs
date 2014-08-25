@@ -58,13 +58,13 @@ public class DisplayNarration : MonoBehaviour
 	private int narrativeIndex = 0;
 
 	//Profile image name shortcuts
-	private string imgBlank = "";
-	private string imgDakota = "";
-	private string imgWarringer = "";
-	private string imgJoshHarbor = "";
-	private string imgIsabellaIvanova = "";
-	private string imgHansBlau = "";
-	private string imgHirokoTai = "";
+	private string imgBlank = "Craine Sprite";
+	private string imgDakota = "Craine Sprite";
+	private string imgWarringer = "Craine Sprite";
+	private string imgJoshHarbor = "Craine Sprite";
+	private string imgIsabellaIvanova = "Craine Sprite";
+	private string imgHansBlau = "Craine Sprite";
+	private string imgHirokoTai = "Craine Sprite";
 
 	//Character name shortcuts
 	private string nameMale = "Male ";
@@ -158,9 +158,64 @@ public class DisplayNarration : MonoBehaviour
 		         imgWarringer,
 		         nameSergWarringer,
 		         "Welcome, privates. I am Sergeant Carson Warringer. You may " +
-		         "address me as ‘Sergeant’ or ‘Sergeant Warringer’. I will " +
+		         "address me as ‘Sergeant’, ‘Sergeant Warringer’, or 'sir'. I will " +
 		         "be giving you all your orders from here on.");
-		//Introductions
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer steps closer to the man farthest to the left," +
+				 "then announces, \"You will introduce yourselves now. Who are you and why are you here?\"");
+		AddNarr (scene1,
+		         imgJoshHarbor,
+		         nameSpecJoshua,
+		         "Specialist Joshua Harbor, sir! The ships the military uses " +
+		         "are fascinating, and I truly enjoy having the chance to " +
+		         "work on them at the benefit of humanity.");
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer nods, then steps closer to the woman " +
+		         "to the right of Joshua.");
+		AddNarr (scene1,
+		         imgHirokoTai,
+		         nameSpecHiroko,
+		         "Specialist Hiroko Tai, sir. I want to keep my team happy " +
+		         "and healthy.");
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer nods, then steps closer to the young " +
+		         "man to the right of Hiroko and to the left of you.");
+		AddNarr (scene1,
+		         imgHansBlau,
+		         namePrivHans,
+		         "Private Hans Blau, sir. Military blood runs in the family, " +
+		         "so it was obvious I’d join and do them proud.");
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer nods, then steps in front of you.");
+		AddNarr (scene1,
+		        imgDakota,
+		        namePrivDakota,
+		        "Private Dakota Grey, sir. I joined the war because I want " +
+		        "to help save my loved ones from Gymna.");
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer nods, then steps closer to the young " +
+		         "woman last in line.");
+		AddNarr (scene1,
+		         imgIsabellaIvanova,
+		         namePrivIsabella,
+		         "Private Isabella Ivanova, sir. My family died to Gymna. " +
+		         "Without a place to call home, the military seemed like " +
+		         "the best option.");
+		AddNarr (scene1,
+		         imgWarringer,
+		         nameSergWarringer,
+		         "Sergeant Warringer simply nods one last time, then steps " +
+		         "back to his original position.");
 		AddNarr (scene1,
 		         imgWarringer,
 		         nameSergWarringer,
@@ -181,12 +236,19 @@ public class DisplayNarration : MonoBehaviour
 
 	void OnGUI()
 	{
+		//Draw the speaker's box and name
 		GUI.Label (speakerBox, gameNarrative[sceneID].narration[narrativeIndex].speaker, boxStyle);
+		//Draw the speaker's profile image
 		GUI.DrawTexture (imageBox, gameNarrative [sceneID].narration [narrativeIndex].image);
+		//Draw the dialogue box as a button which, if left-clicked, advances the scene
 		if (GUI.Button (narrationBox, gameNarrative[sceneID].narration[narrativeIndex].narration, boxStyle))
 		{
-			if (narrativeIndex+1 < gameNarrative[sceneID].narration.Count)
-				narrativeIndex++;
+			if (Event.current.button == 0)
+				if (narrativeIndex+1 < gameNarrative[sceneID].narration.Count)
+					narrativeIndex++;
+			if (Event.current.button == 1)
+				if (narrativeIndex > 0)
+					narrativeIndex--;
 		}
 	}
 }
