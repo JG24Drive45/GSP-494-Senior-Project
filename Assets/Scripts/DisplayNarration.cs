@@ -246,6 +246,8 @@ public class DisplayNarration : MonoBehaviour
 			if (Event.current.button == 0)
 				if (narrativeIndex+1 < gameNarrative[sceneID].narration.Count)
 					narrativeIndex++;
+				else
+					Application.LoadLevel( "Level" + PlayerSettingsScript.GetInstance.levelNum.ToString() );
 			if (Event.current.button == 1)
 				if (narrativeIndex > 0)
 					narrativeIndex--;
