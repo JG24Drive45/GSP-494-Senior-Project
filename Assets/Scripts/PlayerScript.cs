@@ -9,6 +9,9 @@ public class PlayerScript : MonoBehaviour
 	public delegate void EnemyCollision( float damageVal );
 	public static event EnemyCollision OnEnemyCollision;
 
+	public delegate void KeyPress();
+	public static event KeyPress OnPlayerShooting;
+
 	public float hSpeed;
 	public float vSpeed;
 
@@ -43,6 +46,8 @@ public class PlayerScript : MonoBehaviour
 		// Did the player shoot?
 		if( Input.GetKeyDown( KeyCode.Space ) )
 		{
+			if( OnPlayerShooting != null )
+				OnPlayerShooting();
 			Instantiate( bullet1, GameObject.Find( "PlayerMuzzle" ).transform.position, Quaternion.identity );
 		}
 	}
