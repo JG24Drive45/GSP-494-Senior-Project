@@ -8,7 +8,7 @@ public class MenuTextScript : MonoBehaviour
 	public GUIStyle guiStyle;										// GUIStyle for the text
 
 	// Private Variables
-	private string[] menuText = new string[1];						// Array to hold all the possible strings
+	private string[] menuText = new string[2];						// Array to hold all the possible strings
 	private string text;											// Variable to hold the object's text string
 
 	private int textLength;											// Length of the object's string text
@@ -33,10 +33,19 @@ public class MenuTextScript : MonoBehaviour
 					  	"Jordan Huffman\n" +
 						"Eric Huntzberry";
 
+		menuText[1] = 	"Use the arrow or WASD\n" +
+						"keys to move your ship\n\n\n" +
+						"Use the spacebar\n" +
+						"to shoot";
+
 		switch( this.gameObject.name )
 		{
 		case "CreditsMenuText":
 			text = menuText[0];
+			break;
+
+		case "InstructionsMenuText":
+			text = menuText[1];
 			break;
 		}
 
@@ -49,6 +58,9 @@ public class MenuTextScript : MonoBehaviour
 
 		// Calculate the font size
 		guiStyle.fontSize = (int)( height * fontSizeRate );
+
+		// Set font weight
+		guiStyle.fontStyle = FontStyle.Normal;
 
 		// Used for drop shadow
 		blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 153, 103 );
@@ -85,7 +97,8 @@ public class MenuTextScript : MonoBehaviour
 	#region void OnGUI()
 	void OnGUI()
 	{
-		guiStyle.normal.textColor = Color.red;
+		//guiStyle.normal.textColor = Color.red;
+		guiStyle.normal.textColor = new Color( 0.97f, 0.66f, 0.0f );
 		GUI.Label( blackTextRect, currentBlackText, guiStyle );
 		guiStyle.normal.textColor = Color.white;
 		GUI.Label( whiteTextRect, currentText, guiStyle );

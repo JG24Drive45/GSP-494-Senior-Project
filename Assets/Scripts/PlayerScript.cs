@@ -9,17 +9,19 @@ public class PlayerScript : MonoBehaviour
 	public delegate void EnemyCollision( float damageVal );
 	public static event EnemyCollision OnEnemyCollision;
 
-	public float hSpeed = 5.0f;
-	public float vSpeed = 3.0f;
+	public float hSpeed;
+	public float vSpeed;
 
-	public int health	= 100;
-	public int shield	= 100;
+	public int health	= 100;					// DON"T NEED THESE
+	public int shield	= 100;					// DON'T NEED THESE
 
 	public GameObject bullet1;
 
 	void Start () 
 	{
-		
+		hSpeed = PlayerSettingsScript.GetInstance.shipSpeed.x;
+		vSpeed = PlayerSettingsScript.GetInstance.shipSpeed.y;
+
 	}
 
 	void Update () {

@@ -3,10 +3,12 @@ using System.Collections;
 
 public class PlayerSettingsScript : MonoBehaviour
 {
-	public static int score		= 0;
-	public static int debris	= 0;
+	public int totalScore		= 0;
+	public int totalDebris		= 0;
+	public Vector2 shipSpeed	= new Vector2( 5.0f, 3.0f ); 
 
-	private static PlayerSettingsScript instance = null;	
+	private static PlayerSettingsScript instance = null;
+	
 	public static PlayerSettingsScript GetInstance
 	{
 		get

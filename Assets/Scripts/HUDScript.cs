@@ -88,11 +88,21 @@ public class HUDScript : MonoBehaviour
 			temp.material.SetFloat( "_HealthPercentage", -( 1.0f - health ) );
 			temp.material.SetFloat( "_Inverter", -1.0f );
 		}
+		else
+		{
+			health = 0.0f;
+
+			Renderer temp = GameObject.Find( "LeftHUDPanel" ).GetComponent<Renderer>();
+			temp.material.SetFloat( "_HealthPercentage", -( 0.0f ) );
+			temp.material.SetFloat( "_Inverter", -1.0f );
+		}
 
 		// TODO: Kill Player
 		if( health <= 0.0f )
 		{
 			// Player is dead
+			Debug.Log( "PLAYER IS DEAD!!!" );
+			Application.LoadLevel( "MainMenu" );
 		}
 	}
 	#endregion
@@ -138,6 +148,7 @@ public class HUDScript : MonoBehaviour
 	}
 	#endregion
 
+	#region public void RegenerateShield()
 	public void RegenerateShield()
 	{
 		if( shields < 1.0f )
@@ -151,4 +162,5 @@ public class HUDScript : MonoBehaviour
 		}
 
 	}
+	#endregion
 }
