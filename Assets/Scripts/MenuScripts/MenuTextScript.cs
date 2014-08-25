@@ -28,10 +28,12 @@ public class MenuTextScript : MonoBehaviour
 	#region void Awake()
 	void Awake()
 	{
-		menuText[0] = 	"Kurt Eastabrooks\n" +
-					  	"Jill Gray\n" +
-					  	"Jordan Huffman\n" +
-						"Eric Huntzberry";
+		menuText[0] = 	"Kurt Eastabrooks - Gameplay Programmer\n" +
+					  	"Jill Gray - Main Menu & GUI Programmer\n" +
+					  	"Jordan Huffman - Enemy & AI Programmer\n" +
+						"Eric Huntzberry - Sound & Narration Programmer\n\n" +
+						"Special thanks to Matt Devlin\n" +
+						"for Main Menu and HUD artwork";
 
 		menuText[1] = 	"Use the arrow or WASD\n" +
 						"keys to move your ship\n\n\n" +
