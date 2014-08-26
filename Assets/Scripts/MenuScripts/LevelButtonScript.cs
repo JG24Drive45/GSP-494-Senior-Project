@@ -7,9 +7,27 @@ public class LevelButtonScript : MonoBehaviour
 	public float levelTime;
 	public bool isLevelBeaten	= false;
 
+	public bool isLevelUnlocked = false;
+
+	public Material[] materials;
+
 	void Awake()
 	{
 		levelTime = 60 + ( (levelNum - 1) % 10 ) * 10;
+
+		if( levelNum == 1 )
+		{
+			isLevelUnlocked = true;
+			renderer.material = materials[1];
+		}
+		else
+		{
+			isLevelUnlocked = PlayerSettingsScript.GetInstance.levelStatus[levelNum - 2];
+			if( isLevelUnlocked )
+				renderer.material = materials[1];
+			else
+				renderer.material = materials[0];
+		}
 	}
 
 	void Start () 
@@ -23,15 +41,18 @@ public class LevelButtonScript : MonoBehaviour
 
 	void OnMouseUp()
 	{
-		switch( this.gameObject.name )
+		if( isLevelUnlocked )
 		{
-		case "Level1Button":
-			Debug.Log( "Clicked Level 1 Buton" );
-			PlayerSettingsScript.GetInstance.levelNum = levelNum;
-			PlayerSettingsScript.GetInstance.levelTime = levelTime;
-			//Application.LoadLevel( "Jills Test Level" );
-			Application.LoadLevel( "Narrative Cutscene" );
-			break;
+			switch( this.gameObject.name )
+			{
+			case "Level1Button":
+				Debug.Log( "Clicked Level 1 Buton" );
+				PlayerSettingsScript.GetInstance.levelNum = levelNum;
+				PlayerSettingsScript.GetInstance.levelTime = levelTime;
+				//Application.LoadLevel( "Jills Test Level" );
+				Application.LoadLevel( "Narrative Cutscene" );
+				break;
+			}
 		}
 	}
 
