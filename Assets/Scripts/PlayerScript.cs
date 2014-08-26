@@ -69,6 +69,8 @@ public class PlayerScript : MonoBehaviour
 				PlayerSettingsScript.GetInstance.totalScore += OnGetPointsVal();
 			if( OnGetDebrisVal != null )
 				PlayerSettingsScript.GetInstance.totalDebris += OnGetDebrisVal();
+			// Increment the current level in player settings
+			PlayerSettingsScript.GetInstance.levelNum++;
 			// Go back to the main menu
 			Application.LoadLevel( "MainMenu" );
 		}

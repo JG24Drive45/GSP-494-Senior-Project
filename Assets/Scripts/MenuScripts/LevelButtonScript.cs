@@ -29,7 +29,8 @@ public class LevelButtonScript : MonoBehaviour
 			Debug.Log( "Clicked Level 1 Buton" );
 			PlayerSettingsScript.GetInstance.levelNum = levelNum;
 			PlayerSettingsScript.GetInstance.levelTime = levelTime;
-			Application.LoadLevel( "Jills Test Level" );
+			//Application.LoadLevel( "Jills Test Level" );
+			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 		}
 	}
