@@ -5,7 +5,7 @@ public class PlayerSettingsScript : MonoBehaviour
 {
 	public int totalScore		= 0;
 	public int totalDebris		= 0;
-	public float shipSpeed		= 10.0f;
+	public float shipSpeed		= 5.0f;
 	public int weaponStrength	= 5;
 
 	public int upgradePoints	= 0;
