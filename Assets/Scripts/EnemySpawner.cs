@@ -49,27 +49,27 @@ public class EnemySpawner : MonoBehaviour
 			case 5:
 				GameObject enemyObject1 = ( GameObject )Instantiate( Enemy5, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
 				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-				                                                                       -1.0f ), Quaternion.identity );
+				                                                                       0.0f ), Quaternion.identity );
 				break;
 			case 4:
 				GameObject enemyObject2 = ( GameObject )Instantiate( Enemy4, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
 				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-				                                                                       -1.0f ), Quaternion.identity );
+				                                                                       0.0f ), Quaternion.identity );
 				break;
 			case 3:
 				GameObject enemyObject3 = ( GameObject )Instantiate( Enemy3, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
 				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-				                                                                       -1.0f ), Quaternion.identity );
+				                                                                       0.0f ), Quaternion.identity );
 				break;
 			case 2:
 				GameObject enemyObject4 = ( GameObject )Instantiate( Enemy2, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
 				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-				                                                                       -1.0f ), Quaternion.identity );
+				                                                                       0.0f ), Quaternion.identity );
 				break;
 			case 1:
 				GameObject enemyObject5 = ( GameObject )Instantiate( Enemy1, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
 				                                                                       myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
-				                                                                       -1.0f ), Quaternion.identity );
+				                                                                       0.0f ), Quaternion.identity );
 				break;
 			default:
 				break;

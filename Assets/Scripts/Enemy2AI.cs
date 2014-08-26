@@ -21,12 +21,15 @@ public class Enemy2AI : MonoBehaviour
 	public Vector3 distance;			// distance to the destination
 	public Vector3 startPosition;		// the starting position of the ship
 	public Transform target;			// the target of the AI destination
+
+	public GameObject debris;			// debri game object
 	
 	public Camera myCamera;				// main camera
 
 	void Start () 
 	{
 		target = GameObject.Find("Player").transform;
+		health = 5;
 		speed = 2.5f;
 		myCamera = Camera.main;
 
@@ -84,4 +87,18 @@ public class Enemy2AI : MonoBehaviour
 		transform.position = startPosition;
 		moving = true;
 	}	
+
+	void Death()
+	{
+		GameObject debrisObject = (GameObject)Instantiate(debris, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.gameObject.tag == "PlayerBullet")
+		{
+
+		}
+	}
 }

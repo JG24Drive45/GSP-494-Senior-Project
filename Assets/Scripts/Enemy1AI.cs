@@ -10,6 +10,8 @@ public class Enemy1AI : MonoBehaviour
 	public Vector3 distance;			// distance to the destination
 	public Transform target;			// the target of the AI destination
 
+	public GameObject debris;			// debri game object
+
 	public Camera myCamera;				// main camera
 	public int xMin;
 	public int xMax;
@@ -17,6 +19,7 @@ public class Enemy1AI : MonoBehaviour
 	void Start () 
 	{
 		target = GameObject.Find("Player").transform;
+		health = 5;
 		speed = 5.0f;
 		myCamera = Camera.main;
 		xMin = 25;
@@ -61,6 +64,12 @@ public class Enemy1AI : MonoBehaviour
 		                             myCamera.ScreenToWorldPoint( new Vector3 (0f, Screen.height, 0f ) ).y,
 		                                 -1.0f);
 		moving = false;		// reset moving to false to calculate new destination
+	}
+
+	void Death()
+	{
+		GameObject debrisObject = (GameObject)Instantiate(debris, transform.position, Quaternion.identity);
+		Destroy(gameObject);
 	}
 
 }
