@@ -75,7 +75,8 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the continue button" );
-			Application.LoadLevel( "LevelSelect" );
+			PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2;
+			Application.LoadLevel( "DisplayNarration" );
 			break;
 		}
 	}
