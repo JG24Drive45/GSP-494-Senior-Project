@@ -71,6 +71,12 @@ public class MenuButtonScript : MonoBehaviour
 			Debug.Log( "Clicked the back button" );
 			Application.LoadLevel( "MainMenu" );
 			break;
+		case "ContinueButton":
+			if( onMouseClick != null )
+				onMouseClick();
+			Debug.Log( "Clicked the continue button" );
+			Application.LoadLevel( "LevelSelect" );
+			break;
 		}
 	}
 	#endregion
