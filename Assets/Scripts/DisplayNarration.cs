@@ -97,7 +97,7 @@ public class DisplayNarration : MonoBehaviour
 	private SceneNarration sceneLvl1Close = new SceneNarration();
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		//Setting box dimensions
 		narrationBox.xMin = 0;
@@ -119,6 +119,8 @@ public class DisplayNarration : MonoBehaviour
 		//Skip box has same style to other boxes, but is centered
 		skipBoxStyle = new GUIStyle (boxStyle);
 		skipBoxStyle.alignment = TextAnchor.UpperCenter;
+		//Current scene gathered from PlayerSettings
+		sceneID = PlayerSettingsScript.GetInstance.sceneNum;
 
 		AddNarr (sceneIntro,
 		         imgBlank,
