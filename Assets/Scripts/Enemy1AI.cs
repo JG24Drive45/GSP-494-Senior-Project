@@ -72,4 +72,12 @@ public class Enemy1AI : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.gameObject.tag == "PlayerBullet")
+		{
+			Death ();
+		}
+	}
+
 }
