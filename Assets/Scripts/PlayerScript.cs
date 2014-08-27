@@ -85,6 +85,8 @@ public class PlayerScript : MonoBehaviour
 				Time.timeScale = 0.0f;			
 				// Bring up the end level menu
 				Instantiate( endMenu, new Vector3( 0, 0, 0 ), Quaternion.identity );
+				// Update scene number
+				PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2;
 				// Increment the current level in player settings
 				PlayerSettingsScript.GetInstance.levelNum++;			
 			}

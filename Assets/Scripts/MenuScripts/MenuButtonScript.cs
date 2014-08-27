@@ -76,7 +76,6 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the continue button" );
-			PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2;
 			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 		}
