@@ -24,12 +24,13 @@ public class Enemy3AI : MonoBehaviour
 	public Transform target;			// the target of the AI destination
 	
 	public GameObject debris;			// debri game object
+	public GameObject bullet;			// enemy bullet game object
 	
 	public Camera myCamera;				// main camera
 	
 	void Start () 
 	{
-		target = GameObject.Find("Player").transform;
+		target = GameObject.Find( "Player" ).transform;
 		health = 5;
 		speed = 2.5f;
 		myCamera = Camera.main;
@@ -50,24 +51,25 @@ public class Enemy3AI : MonoBehaviour
 		Movement();			// start the Movement function
 	}
 
+	#region AI Movement
 	void Movement()
 	{
-		if(moving)
+		if( moving )
 		{
-			if(moveUp)
+			if( moveUp )
 			{
 				
 				transform.position += Vector3.up * Time.deltaTime * speed;				// move AI ship to the left
-				if(myCamera.WorldToScreenPoint(transform.position).y >= yMax)				// If AI ship reaches left most side of screen reverse direction
+				if( myCamera.WorldToScreenPoint( transform.position ).y >= yMax )				// If AI ship reaches left most side of screen reverse direction
 				{
 					moveUp = false;
 					moveDown = true;
 				}
 			}
-			if(moveDown)
+			if( moveDown )
 			{
 				transform.position += Vector3.down * Time.deltaTime * speed;				// move AI ship to the right
-				if(myCamera.WorldToScreenPoint(transform.position).y <= yMin)				// If AI ship reaches right most side of screen reverse directions
+				if( myCamera.WorldToScreenPoint( transform.position ).y <= yMin )				// If AI ship reaches right most side of screen reverse directions
 				{
 					moveUp = true;
 					moveDown = false;
@@ -84,18 +86,44 @@ public class Enemy3AI : MonoBehaviour
 		transform.position = startPosition;
 		moving = true;
 	}
+	#endregion
+
+	#region Attack()
+	IEnumerator Attack()
+	{
+		while( health > 0 )
+		{
+			yield return new WaitForSeconds( Random.Range( 1.0f, 1.75f ) );
+			GameObject bulletObject = ( GameObject )Instantiate( bullet, transform.position, Quaternion.identity );
+		}
+	}
+	#endregion
+
+	#region DMG and Collision
+	void TakeDamage()
+	{
+		health -= PlayerSettingsScript.GetInstance.weaponStrength;			// get the weapon dmg and subtract from health
+
+		if( health >= 0 )
+		{
+			Death();
+		}
+	}
 	
 	void Death()
 	{
-		GameObject debrisObject = (GameObject)Instantiate(debris, transform.position, Quaternion.identity);
-		Destroy(gameObject);
+		GameObject debrisObject = ( GameObject )Instantiate( debris, transform.position, Quaternion.identity );
+		Destroy( gameObject );
 	}
 	
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter2D( Collider2D other )
 	{
-		if(other.gameObject.tag == "PlayerBullet")
+		switch( other.gameObject.tag )
 		{
-			Death ();
+		case "PlayerBullet":
+			TakeDamage();
+			break;
 		}
 	}
+	#endregion
 }

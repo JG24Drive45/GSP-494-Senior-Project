@@ -23,6 +23,7 @@ public class Enemy2AI : MonoBehaviour
 	public Transform target;			// the target of the AI destination
 
 	public GameObject debris;			// debri game object
+	public GameObject bullet;			// enemy bullet game object
 	
 	public Camera myCamera;				// main camera
 
@@ -49,6 +50,7 @@ public class Enemy2AI : MonoBehaviour
 		Movement();			// start the Movement function
 	}
 
+	#region AI Movement
 	void Movement()
 	{
 		if(moving)
@@ -73,10 +75,6 @@ public class Enemy2AI : MonoBehaviour
 				}
 			}
 		}
-//		if( transform.position.x <= -8.0f || transform.position.x >= 8.0f || transform.position.y >= 6.0f || transform.position.y <= -6.0f )
-//		{
-//				this code is to reset the position of the AI ship if it moves off screen, should not need it for Enemy 2 AI
-//		}
 	}
 	// Sets the start position of the AI
 	void SetStartPosition()
@@ -87,18 +85,44 @@ public class Enemy2AI : MonoBehaviour
 		transform.position = startPosition;
 		moving = true;
 	}	
+	#endregion
 
-	void Death()
+	#region Attack()
+	IEnumerator Attack()
 	{
-		GameObject debrisObject = (GameObject)Instantiate(debris, transform.position, Quaternion.identity);
-		Destroy(gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if(other.gameObject.tag == "PlayerBullet")
+		while( health > 0 )
 		{
-			Death ();
+			yield return new WaitForSeconds( Random.Range( 1.0f, 1.75f ) );
+			GameObject bulletObject = ( GameObject )Instantiate( bullet, transform.position, Quaternion.identity );
 		}
 	}
+	#endregion
+
+	#region DMG and Collision
+	void TakeDamage()
+	{
+		health -= PlayerSettingsScript.GetInstance.weaponStrength;			// get the weapon dmg and subtract from health
+		
+		if( health >= 0 )
+		{
+			Death();
+		}
+	}
+	
+	void Death()
+	{
+		GameObject debrisObject = ( GameObject )Instantiate( debris, transform.position, Quaternion.identity );
+		Destroy( gameObject );
+	}
+	
+	void OnTriggerEnter2D( Collider2D other )
+	{
+		switch( other.gameObject.tag )
+		{
+		case "PlayerBullet":
+			TakeDamage();
+			break;
+		}
+	}
+	#endregion
 }

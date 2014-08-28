@@ -20,17 +20,17 @@ public class EnemySpawner : MonoBehaviour
 
 	void Start () 
 	{
-		_PlayerScript = GameObject.Find("Player").GetComponent<PlayerScript>();		// Get the player script to check the health of player
+		_PlayerScript = GameObject.Find( "Player" ).GetComponent< PlayerScript >();		// Get the player script to check the health of player
 		spawnEnemies = true;
 		enemyToSpawn = 0;
 		xMin = 25;
 		xMax = Screen.width;
-		StartCoroutine("SpawnEnemies");
+		StartCoroutine( "SpawnEnemies" );
 	}
 
 	void Update ()
 	{
-		if(_PlayerScript.health <= 0)   // If the player has died stop spawners
+		if( _PlayerScript.health <= 0 )   // If the player has died stop spawners
 		{
 			spawnEnemies = false;
 			enemyToSpawn = -1;
@@ -39,12 +39,12 @@ public class EnemySpawner : MonoBehaviour
 
 	public IEnumerator SpawnEnemies()
 	{
-		while(spawnEnemies)
+		while( spawnEnemies )
 		{
-			//enemyToSpawn = Random.Range(0,6);		// Select which enemy to create
-			enemyToSpawn = 2;						// Uncomment to test a specific enemy
+			enemyToSpawn = Random.Range(0,6);		// Select which enemy to create
+			//enemyToSpawn = 2;						// Uncomment to test a specific enemy
 
-			switch(enemyToSpawn)
+			switch( enemyToSpawn )
 			{
 			case 5:
 				GameObject enemyObject1 = ( GameObject )Instantiate( Enemy5, new Vector3( myCamera.ScreenToWorldPoint( new Vector3( Random.Range( xMin, xMax ), 0f, 0f ) ).x, 
@@ -74,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
 			default:
 				break;
 			}
-			yield return new WaitForSeconds(1.5f);
+			yield return new WaitForSeconds( 1.5f );
 		}
 	}
 }

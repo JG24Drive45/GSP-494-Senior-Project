@@ -11,6 +11,7 @@ public class Enemy1AI : MonoBehaviour
 	public Transform target;			// the target of the AI destination
 
 	public GameObject debris;			// debri game object
+	public GameObject bullet;			// enemy bullet game object
 
 	public Camera myCamera;				// main camera
 	public int xMin;
@@ -26,6 +27,7 @@ public class Enemy1AI : MonoBehaviour
 		xMax = Screen.width - 25;
 		moving = false;
 		SetDestination();
+		StartCoroutine( "Attack" );
 	}
 
 	void Update () 
@@ -33,6 +35,7 @@ public class Enemy1AI : MonoBehaviour
 		Movement ();					// Start the movement of the AI
 	}
 
+	#region AI Movement
 	void Movement()
 	{
 		if(!moving)
@@ -53,6 +56,7 @@ public class Enemy1AI : MonoBehaviour
 
 	}
 
+
 	void SetDestination()
 	{
 		destination = new Vector3(target.position.x, target.position.y + 1, 0.0f);		// set destination to a little bit past the intended target
@@ -65,19 +69,44 @@ public class Enemy1AI : MonoBehaviour
 		                                 -1.0f);
 		moving = false;		// reset moving to false to calculate new destination
 	}
+	#endregion
 
-	void Death()
+	#region Attack()
+	IEnumerator Attack()
 	{
-		GameObject debrisObject = (GameObject)Instantiate(debris, transform.position, Quaternion.identity);
-		Destroy(gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if(other.gameObject.tag == "PlayerBullet")
+		while( health > 0 )
 		{
-			Death ();
+			yield return new WaitForSeconds( Random.Range( 1.0f, 1.75f ) );
+			GameObject bulletObject = ( GameObject )Instantiate( bullet, transform.position, Quaternion.identity );
 		}
 	}
+	#endregion
 
+	#region DMG and Collision
+	void TakeDamage()
+	{
+		health -= PlayerSettingsScript.GetInstance.weaponStrength;			// get the weapon dmg and subtract from health
+		
+		if( health >= 0 )
+		{
+			Death();
+		}
+	}
+	
+	void Death()
+	{
+		GameObject debrisObject = ( GameObject )Instantiate( debris, transform.position, Quaternion.identity );
+		Destroy( gameObject );
+	}
+	
+	void OnTriggerEnter2D( Collider2D other )
+	{
+		switch( other.gameObject.tag )
+		{
+		case "PlayerBullet":
+			TakeDamage();
+			break;
+		}
+	}
+	#endregion
 }
