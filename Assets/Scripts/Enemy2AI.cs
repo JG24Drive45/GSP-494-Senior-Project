@@ -21,6 +21,7 @@ public class Enemy2AI : MonoBehaviour
 	public Vector3 distance;			// distance to the destination
 	public Vector3 startPosition;		// the starting position of the ship
 	public Transform target;			// the target of the AI destination
+	public int pointValue;
 
 	public GameObject debris;			// debri game object
 	public GameObject bullet;			// enemy bullet game object
@@ -29,6 +30,7 @@ public class Enemy2AI : MonoBehaviour
 
 	void Start () 
 	{
+		pointValue = 200;
 		target = GameObject.Find("Player").transform;
 		health = 5;
 		speed = 2.5f;
@@ -82,7 +84,7 @@ public class Enemy2AI : MonoBehaviour
 	{
 		startPosition = new Vector3( myCamera.ScreenToWorldPoint( new Vector3( xMin, 0f, 0f ) ).x, 
 		                                      myCamera.ScreenToWorldPoint( new Vector3 (0f, Random.Range(yMin, yMax), 0f ) ).y,
-		                                      -1.0f);
+		                                      0.0f);
 		transform.position = startPosition;
 		moving = true;
 	}	
@@ -112,11 +114,12 @@ public class Enemy2AI : MonoBehaviour
 	
 	void Death()
 	{
+		GameObject.Find( "HUD" ).GetComponent<HUDScript>().UpdateScore( pointValue );
 		GameObject debrisObject = ( GameObject )Instantiate( debris, transform.position, Quaternion.identity );
 		Destroy( gameObject );
 	}
 	
-	void OnTriggerEnter2D( Collider2D other )
+	void OnCollisionEnter2D( Collision2D other )
 	{
 		switch( other.gameObject.tag )
 		{

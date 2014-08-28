@@ -9,6 +9,7 @@ public class Enemy1AI : MonoBehaviour
 	public Vector3 destination;			// destination of ship
 	public Vector3 distance;			// distance to the destination
 	public Transform target;			// the target of the AI destination
+	public int pointValue;
 
 	public GameObject debris;			// debri game object
 	public GameObject bullet;			// enemy bullet game object
@@ -19,6 +20,7 @@ public class Enemy1AI : MonoBehaviour
 
 	void Start () 
 	{
+		pointValue = 100;
 		target = GameObject.Find("Player").transform;
 		health = 5;
 		speed = 5.0f;
@@ -95,11 +97,12 @@ public class Enemy1AI : MonoBehaviour
 	
 	void Death()
 	{
+		GameObject.Find( "HUD" ).GetComponent<HUDScript>().UpdateScore( pointValue );
 		GameObject debrisObject = ( GameObject )Instantiate( debris, transform.position, Quaternion.identity );
 		Destroy( gameObject );
 	}
 	
-	void OnTriggerEnter2D( Collider2D other )
+	void OnCollisionEnter2D( Collision2D other )
 	{
 		switch( other.gameObject.tag )
 		{
