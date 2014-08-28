@@ -71,7 +71,7 @@ public class PlayerScript : MonoBehaviour
 			transform.position = new Vector3( transform.position.x, 2.0f, 0.0f );
 
 		// Did the player shoot?
-		if( Input.GetKeyDown( KeyCode.Space ) && bCanShoot )
+		if( Input.GetKey( KeyCode.Space ) && bCanShoot )
 		{
 			bCanShoot = false;
 			if( OnPlayerShooting != null )
