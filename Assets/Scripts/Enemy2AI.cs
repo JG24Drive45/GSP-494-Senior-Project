@@ -43,6 +43,7 @@ public class Enemy2AI : MonoBehaviour
 		moveRight = true;
 
 		SetStartPosition();
+		StartCoroutine( "Attack" );
 	}
 
 	void Update () 

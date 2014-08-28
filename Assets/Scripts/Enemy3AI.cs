@@ -44,6 +44,7 @@ public class Enemy3AI : MonoBehaviour
 		moveDown = true;
 		
 		SetStartPosition();
+		StartCoroutine( "Attack" );
 	}
 	
 	void Update () 
