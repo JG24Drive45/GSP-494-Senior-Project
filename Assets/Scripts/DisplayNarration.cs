@@ -64,8 +64,8 @@ public class DisplayNarration : MonoBehaviour
 
 	//Profile image name shortcuts
 	private string imgBlank = "Craine Sprite";
-	private string imgDakota = "Craine Sprite";
-	private string imgWarringer = "Craine Sprite";
+	private string imgDakotaGrey = "Craine Sprite";
+	private string imgCarsonWarringer = "Craine Sprite";
 	private string imgJoshHarbor = "Craine Sprite";
 	private string imgIsabellaIvanova = "Craine Sprite";
 	private string imgHansBlau = "Craine Sprite";
@@ -122,13 +122,14 @@ public class DisplayNarration : MonoBehaviour
 		//Current scene gathered from PlayerSettings
 		sceneID = PlayerSettingsScript.GetInstance.sceneNum;
 
+		//Intro scene
 		AddNarr (sceneIntro,
 		         imgBlank,
 		         nameFemale + nameNewsRep,
 		         "The Federation of Humanity claim to have found a " +
 		         "source of ‘X01’, the ingredient necessary for creating the " +
 		         "antidote to Gymna, the deadly disease that has spread " +
-		         "throughout the planets of humanity");
+		         "throughout the planets of humanity.");
 		AddNarr (sceneIntro,
 		         imgBlank,
 		         nameFemale + nameNewsRep,
@@ -145,7 +146,7 @@ public class DisplayNarration : MonoBehaviour
 		AddNarr (sceneIntro,
 		         imgBlank,
 		         nameFemale + nameNewsRep,
-		         "We have with us a representative from the military" +
+		         "We have with us a representative from the military " +
 				 "to explain what the FoH's goals are with this war.");
 		AddNarr (sceneIntro,
 		         imgBlank,
@@ -156,10 +157,10 @@ public class DisplayNarration : MonoBehaviour
 		AddNarr (sceneIntro,
 		         imgBlank,
 		         nameMale + nameMilRep,
-		         "The FoH is still looking for new recruits to help save" +
+		         "The FoH is still looking for new recruits to help save " +
 				 "humanity by fighting against the large armadas of our foes.");
 		AddNarr (sceneIntro,
-		         imgDakota,
+		         imgDakotaGrey,
 		         namePrivDakota,
 		         "I decided to join the war effort shortly after hearing that " +
 		         "report. It wasn’t a difficult decision, seeing as most of " +
@@ -170,21 +171,21 @@ public class DisplayNarration : MonoBehaviour
 		         "of the year. Besides… the FoH says this war can save them. " +
 		         "I need to do my part… Ah. Someone’s coming.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameNone,
 		         "A pleasant-looking man stands in front of you and your " +
 		         "squad with his arms folded. He begins to speak with a " +
 		         "warm voice.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Welcome, soldiers. I am Sergeant Carson Warringer. You may " +
 		         "address me as ‘Sergeant’, ‘Sergeant Warringer’, or 'sir'. I will " +
 		         "be giving you all your orders from here on.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
-		         "Sergeant Warringer steps closer to the man farthest to the left," +
+		         "Sergeant Warringer steps closer to the man farthest to the left, " +
 				 "then announces, \"You will introduce yourselves now. Who are you and why are you here?\"");
 		AddNarr (sceneIntro,
 		         imgJoshHarbor,
@@ -193,7 +194,7 @@ public class DisplayNarration : MonoBehaviour
 		         "are fascinating, and I truly enjoy having the chance to " +
 		         "work on them at the benefit of humanity.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Sergeant Warringer nods, then steps closer to the woman " +
 		         "to the right of Joshua.");
@@ -203,7 +204,7 @@ public class DisplayNarration : MonoBehaviour
 		         "Specialist Hiroko Tai, sir. I want to keep my team happy " +
 		         "and healthy.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Sergeant Warringer nods, then steps closer to the young " +
 		         "man to the right of Hiroko and to the left of you.");
@@ -213,16 +214,16 @@ public class DisplayNarration : MonoBehaviour
 		         "Private Hans Blau, sir. Military blood runs in the family, " +
 		         "so it was obvious I’d join and do them proud.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Sergeant Warringer nods, then steps in front of you.");
 		AddNarr (sceneIntro,
-		        imgDakota,
+		        imgDakotaGrey,
 		        namePrivDakota,
 		        "Private Dakota Grey, sir. I joined the war because I want " +
 		        "to help save my loved ones from Gymna.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Sergeant Warringer nods, then steps closer to the young " +
 		         "woman last in line.");
@@ -233,34 +234,122 @@ public class DisplayNarration : MonoBehaviour
 		         "Without a place to call home, the military seemed like " +
 		         "the best option.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Sergeant Warringer simply nods one last time, then steps " +
 		         "back to his original position.");
 		AddNarr (sceneIntro,
-		         imgWarringer,
+		         imgCarsonWarringer,
 		         nameSergWarringer,
 		         "Good. Now that you all know why your allies are fighting, " +
 		         "I hope that you can respect those reasons. You need to " +
 		         "respect and trust each other to become respected and " +
 		         "trustworthy soldiers. That is all for now. You have been " +
-		         "given a tour of the facility. You will go through a" +
+		         "given a tour of the facility. You will go through a " +
 		         "basic training simulation as a team tomorrow at 0800 hours. You are " +
 		         "free until then. Do not be late. Dismissed.");
 		sceneIntro.destination = levelSelect;
 		gameNarrative.Add (sceneIntro);
 
+		//Level 1 pre-scene
 		AddNarr (sceneLvl1Open,
-		         imgBlank,
-		         nameNone,
-		         "This is placeholder text for level 1's opening scene.");
+		         imgCarsonWarringer,
+		         nameSergWarringer,
+		         "So as to familiarize you all with your comrades’ roles " +
+		         "on-board, I will be re-stating the areas you have trained " +
+		         "for. I will of course be commanding. Private Dakota Grey " +
+		         "will be handling communications.");
+		AddNarr (sceneLvl1Open,
+		         imgDakotaGrey,
+		         namePrivDakota,
+		         "Yes, sir.");
+		AddNarr (sceneLvl1Open,
+		         imgCarsonWarringer,
+		         nameSergWarringer,
+		         "Private Hans Blau will be directing our weapons.");
+		AddNarr (sceneLvl1Open,
+		        imgHansBlau,
+		        namePrivHans,
+		        "Yes, sir!");
+		AddNarr (sceneLvl1Open,
+		         imgCarsonWarringer,
+		         nameSergWarringer,
+		         "Private Isabella Isanova will be doing shield calculations.");
+		AddNarr (sceneLvl1Open,
+		         imgIsabellaIvanova,
+		         namePrivIsabella,
+		         "Yes, sir.");
+		AddNarr (sceneLvl1Open,
+		         imgCarsonWarringer,
+		         nameSergWarringer,
+		         "Specialist Joshua Harbor will be with the engines.");
+		AddNarr (sceneLvl1Open,
+		        imgJoshHarbor,
+		        nameSpecJoshua,
+		        "Yessir!");
+		AddNarr (sceneLvl1Open,
+		         imgCarsonWarringer,
+		        nameSergWarringer,
+		        "And finally, Specialist Hiroko Tai will be on standby to " +
+		        "monitor the physical and mental state of the crew.");
+		AddNarr (sceneLvl1Open,
+		        imgHirokoTai,
+		        nameSpecHiroko,
+		        "Yes, sir.");
+		AddNarr (sceneLvl1Open,
+		         imgCarsonWarringer,
+		        nameSergWarringer,
+		        "Good. Battle stations, soldiers.");
 		sceneLvl1Open.destination = level1;
 		gameNarrative.Add (sceneLvl1Open);
 
+		//Level 1 post-scene
 		AddNarr (sceneLvl1Close,
-		         imgBlank,
-		         nameNone,
-		         "This is placeholder text for level 1's closing scene.");
+		         imgCarsonWarringer,
+		         nameSergWarringer,
+		         "Good work. Specialist Tai will now be performing a " +
+		         "routine checkup on you all. You are dismissed when she " +
+		         "is done.");
+		AddNarr (sceneLvl1Close,
+		        imgHirokoTai,
+		        nameNone,
+		        "Hiroko goes from person to person, checking different body " +
+		        "parts and asking questions regarding your mental states.");
+		AddNarr (sceneLvl1Close,
+		        imgBlank,
+		        nameNone,
+		        "You and the rest of the crew head to the cafeteria after " +
+		        "Hiroko confirms everyone's health.");
+		AddNarr (sceneLvl1Close,
+		        imgHansBlau,
+		        namePrivHans,
+		        "That was amazing. Did you see how many enemy crafts we " +
+		        "went up against?");
+		AddNarr (sceneLvl1Close,
+		        imgDakotaGrey,
+		        namePrivDakota,
+		        "It really did seem too exaggerated. One of us, with an " +
+		        "overwhelming technological advantage, against such a large " +
+		        "force of enemies?");
+		AddNarr (sceneLvl1Close,
+		        imgJoshHarbor,
+		        nameSpecJoshua,
+		        "Well, I was informed that our fleet has a technological " +
+		        "advantage over the enemy, but it shouldn’t be so " +
+		        "extraordinary when you consider the size of their fleet.");
+		AddNarr (sceneLvl1Close,
+		        imgHansBlau,
+		        namePrivHans,
+		        "Fine by me. A higher kill count will impress the top brass.");
+		AddNarr (sceneLvl1Close,
+		        imgIsabellaIvanova,
+		        namePrivIsabella,
+		        "Maybe it’s to prepare us for the worst..?");
+		AddNarr (sceneLvl1Close,
+		        imgDakotaGrey,
+		        namePrivDakota,
+		        "We had too much of an advantage for that to be the worst, " +
+		        "but we’ll see when we really get into battle, I suppose.");
 		sceneLvl1Close.destination = levelSelect;
 		gameNarrative.Add (sceneLvl1Close);
 	}
@@ -289,12 +378,12 @@ public class DisplayNarration : MonoBehaviour
 				{
 					Application.LoadLevel(gameNarrative[sceneID].destination);
 				}
-				if (Event.current.button == 1)
+			}
+			if (Event.current.button == 1)
+			{
+				if (narrativeIndex > 0)
 				{
-					if (narrativeIndex > 0)
-					{
-						narrativeIndex--;
-					}
+					narrativeIndex--;
 				}
 			}
 		}
