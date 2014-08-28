@@ -25,14 +25,22 @@ public class PlayerScript : MonoBehaviour
 	public float hSpeed;
 	public float vSpeed;
 
-	//public int health	= 100;					// DON"T NEED THESE
-	//public int shield	= 100;					// DON'T NEED THESE
-
 	public GameObject bullet1;
 
 	public GameObject endMenu;
 
 	private bool bLevelOver = false;
+
+	private float fireInterval = 1.0f;
+	private float fireTimer;
+	private bool  bCanShoot = true;
+
+	#region void Awake()
+	void Awake()
+	{
+		fireTimer = fireInterval;
+	}
+	#endregion
 
 	#region void Start()
 	void Start () 
@@ -63,8 +71,9 @@ public class PlayerScript : MonoBehaviour
 			transform.position = new Vector3( transform.position.x, 2.0f, 0.0f );
 
 		// Did the player shoot?
-		if( Input.GetKeyDown( KeyCode.Space ) )
+		if( Input.GetKeyDown( KeyCode.Space ) && bCanShoot )
 		{
+			bCanShoot = false;
 			if( OnPlayerShooting != null )
 				OnPlayerShooting();
 			Instantiate( bullet1, GameObject.Find( "PlayerMuzzle" ).transform.position, Quaternion.identity );
@@ -96,6 +105,17 @@ public class PlayerScript : MonoBehaviour
 			else
 			{
 				PlayerSettingsScript.GetInstance.levelTime -= Time.deltaTime;
+			}
+		}
+
+		// Update the fire timer if need be
+		if( bCanShoot == false )
+		{
+			fireTimer -= Time.deltaTime;
+			if( fireTimer <= 0.0f )
+			{
+				bCanShoot = true;
+				fireTimer = fireInterval;
 			}
 		}
 	}
