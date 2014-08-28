@@ -27,11 +27,20 @@ public class PlayerScript : MonoBehaviour
 
 	public GameObject bullet1;
 
+	public GameObject endMenu;
+
+	private bool bLevelOver = false;
+
+	#region void Start()
 	void Start () 
 	{
+		Time.timeScale = 1.0f;
+
 		hSpeed = vSpeed = PlayerSettingsScript.GetInstance.shipSpeed;
 	}
+	#endregion
 
+	#region void Update()
 	void Update () {
 		// Update rotation
 		transform.rotation = Quaternion.Euler( new Vector3( 0.0f, -Input.GetAxis( "Horizontal" ) * 20.0f, 0.0f ) );
@@ -59,27 +68,37 @@ public class PlayerScript : MonoBehaviour
 		}
 
 		// Count down level time
-		if( PlayerSettingsScript.GetInstance.levelTime <= 0.0f )
+		if( bLevelOver == false )
 		{
-			// Set the current level to beaten
-			if( OnLevelBeaten != null )
-				OnLevelBeaten( PlayerSettingsScript.GetInstance.levelNum );
-			// Add the player points and debris values to the player settings
-			if( OnGetPointsVal != null )
-				PlayerSettingsScript.GetInstance.totalScore += OnGetPointsVal();
-			if( OnGetDebrisVal != null )
-				PlayerSettingsScript.GetInstance.totalDebris += OnGetDebrisVal();
-			// Increment the current level in player settings
-			PlayerSettingsScript.GetInstance.levelNum++;
-			// Go back to the main menu
-			Application.LoadLevel( "MainMenu" );
-		}
-		else
-		{
-			PlayerSettingsScript.GetInstance.levelTime -= Time.deltaTime;
+			if( PlayerSettingsScript.GetInstance.levelTime <= 0.0f )
+			{
+				bLevelOver = true;
+				// Set the current level to beaten
+				if( OnLevelBeaten != null )
+					OnLevelBeaten( PlayerSettingsScript.GetInstance.levelNum );
+				// Add the player points and debris values to the player settings
+				if( OnGetPointsVal != null )
+					PlayerSettingsScript.GetInstance.totalScore += OnGetPointsVal();
+				if( OnGetDebrisVal != null )
+					PlayerSettingsScript.GetInstance.totalDebris += OnGetDebrisVal();
+				// Pause the game
+				Time.timeScale = 0.0f;			
+				// Bring up the end level menu
+				Instantiate( endMenu, new Vector3( 0, 0, 0 ), Quaternion.identity );
+				// Update scene number
+				PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2;
+				// Increment the current level in player settings
+				PlayerSettingsScript.GetInstance.levelNum++;			
+			}
+			else
+			{
+				PlayerSettingsScript.GetInstance.levelTime -= Time.deltaTime;
+			}
 		}
 	}
+	#endregion
 
+	#region void OnCollisionEnter2D( Collision2D other )
 	void OnCollisionEnter2D( Collision2D other )
 	{
 		switch( other.gameObject.tag )
@@ -101,4 +120,5 @@ public class PlayerScript : MonoBehaviour
 			break;
 		}
 	}
+	#endregion
 }

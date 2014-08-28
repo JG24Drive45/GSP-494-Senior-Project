@@ -24,7 +24,7 @@ public class DebrisScript : MonoBehaviour
 			y = -1.0f;
 		else
 			y = 1.0f;
-		velocity = new Vector3( Random.Range( 0.1f, 0.5f ) * x, Random.Range( 0.1f, 0.5f ) * y, 0.0f ) * Time.deltaTime;
+		velocity = new Vector3( Random.Range( 0.1f, 0.5f ) * x, Random.Range( 0.1f, 0.5f ) * y, 0.0f );
 
 		rotationSpeed = Random.Range( 50.0f, 100.0f );
 	}
@@ -33,7 +33,7 @@ public class DebrisScript : MonoBehaviour
 	#region void Update()
 	void Update () 
 	{
-		transform.position += velocity;
+		transform.position += ( velocity * Time.deltaTime );
 		transform.Rotate( Vector3.forward, rotationSpeed * Time.deltaTime );
 
 		// Destroy the debris if it goes off screen

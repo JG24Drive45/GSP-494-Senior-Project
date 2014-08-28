@@ -35,7 +35,8 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the play game button" );
-			Application.LoadLevel( "LevelSelect" );
+			PlayerSettingsScript.GetInstance.sceneNum = 0;
+			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 		case "LoadGameButton":
 			if( onMouseClick != null )
@@ -70,6 +71,12 @@ public class MenuButtonScript : MonoBehaviour
 				onMouseClick();
 			Debug.Log( "Clicked the back button" );
 			Application.LoadLevel( "MainMenu" );
+			break;
+		case "ContinueButton":
+			if( onMouseClick != null )
+				onMouseClick();
+			Debug.Log( "Clicked the continue button" );
+			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 		}
 	}
