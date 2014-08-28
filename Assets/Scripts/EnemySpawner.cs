@@ -15,12 +15,12 @@ public class EnemySpawner : MonoBehaviour
 	public int enemyToSpawn;
 	public bool spawnEnemies;
 
-	public PlayerScript _PlayerScript;
+	public HUDScript _HUDScript;
 	public Camera myCamera;
 
 	void Start () 
 	{
-		_PlayerScript = GameObject.Find( "Player" ).GetComponent< PlayerScript >();		// Get the player script to check the health of player
+		_HUDScript = GameObject.Find( "HUD" ).GetComponent< HUDScript >();		// Get the player script to check the health of player
 		spawnEnemies = true;
 		enemyToSpawn = 0;
 		xMin = 25;
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
 
 	void Update ()
 	{
-		if( _PlayerScript.health <= 0 )   // If the player has died stop spawners
+		if( _HUDScript.health <= 0 )   // If the player has died stop spawners
 		{
 			spawnEnemies = false;
 			enemyToSpawn = -1;

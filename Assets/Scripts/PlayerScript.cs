@@ -19,11 +19,14 @@ public class PlayerScript : MonoBehaviour
 	public static event GetPoints OnGetPointsVal;
 	public static event GetPoints OnGetDebrisVal;
 
+	public delegate void ShotByEnemy( float damage );
+	public static event ShotByEnemy OnTakeDamage;
+
 	public float hSpeed;
 	public float vSpeed;
 
-	public int health	= 100;					// DON"T NEED THESE
-	public int shield	= 100;					// DON'T NEED THESE
+	//public int health	= 100;					// DON"T NEED THESE
+	//public int shield	= 100;					// DON'T NEED THESE
 
 	public GameObject bullet1;
 
@@ -117,6 +120,24 @@ public class PlayerScript : MonoBehaviour
 				OnDebrisCollected( other.gameObject.GetComponent<DebrisScript>().GetDebrisPointValue() );
 			Debug.Log( "Debris Collected" );
 			Destroy( other.gameObject );
+			break;
+
+		case "EnemyBullet1":
+			if( OnTakeDamage != null )
+				OnTakeDamage( other.gameObject.GetComponent<EnemyBullet1>().damage / 100.0f );
+			Debug.Log( "Took " + other.gameObject.GetComponent<EnemyBullet1>().damage.ToString() + " damage" );
+			break;
+
+		case "EnemyBullet2":
+			if( OnTakeDamage != null )
+				OnTakeDamage( other.gameObject.GetComponent<EnemyBullet2>().damage / 100.0f );
+			Debug.Log( "Took " + other.gameObject.GetComponent<EnemyBullet2>().damage.ToString() + " damage" );
+			break;
+
+		case "EnemyBullet3":
+			if( OnTakeDamage != null )
+				OnTakeDamage( other.gameObject.GetComponent<EnemyBullet3>().damage / 100.0f );
+			Debug.Log( "Took " + other.gameObject.GetComponent<EnemyBullet3>().damage.ToString() + " damage" );
 			break;
 		}
 	}
