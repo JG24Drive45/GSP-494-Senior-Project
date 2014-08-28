@@ -32,6 +32,7 @@ public class SoundControl : MonoBehaviour
 	public AudioClip onHover;
 	public AudioClip onClick;
 	public AudioClip playerBulletFire;
+	public AudioClip enemyBulletFire;
 	
 	public static SoundControl GetInstance
 	{
@@ -59,6 +60,9 @@ public class SoundControl : MonoBehaviour
 		MenuButtonScript.onMouseOver += PlayOnHover;
 		MenuButtonScript.onMouseClick += PlayOnClick;
 		PlayerScript.OnPlayerShooting += PlayPlayerFire;
+		Enemy1AI.OnEnemyFire += PlayEnemyFire;
+		Enemy2AI.OnEnemyFire += PlayEnemyFire;
+		Enemy3AI.OnEnemyFire += PlayEnemyFire;
 	}
 
 	void OnDestroy()
@@ -66,6 +70,9 @@ public class SoundControl : MonoBehaviour
 		MenuButtonScript.onMouseOver -= PlayOnHover;
 		MenuButtonScript.onMouseClick -= PlayOnClick;
 		PlayerScript.OnPlayerShooting -= PlayPlayerFire;
+		Enemy1AI.OnEnemyFire -= PlayEnemyFire;
+		Enemy2AI.OnEnemyFire -= PlayEnemyFire;
+		Enemy3AI.OnEnemyFire -= PlayEnemyFire;
 	}
 
 	void PlayOnHover()
@@ -81,5 +88,10 @@ public class SoundControl : MonoBehaviour
 	void PlayPlayerFire()
 	{
 		audio.PlayOneShot (playerBulletFire);
+	}
+
+	void PlayEnemyFire()
+	{
+		audio.PlayOneShot( enemyBulletFire );
 	}
 }

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Enemy3AI : MonoBehaviour 
 {
+	public delegate void EnemyFire();
+	public static event EnemyFire OnEnemyFire;
 
 	public int health;					// health of AI
 	
@@ -98,6 +100,8 @@ public class Enemy3AI : MonoBehaviour
 		{
 			yield return new WaitForSeconds( Random.Range( 1.0f, 1.75f ) );
 			GameObject bulletObject = ( GameObject )Instantiate( bullet, transform.position, Quaternion.identity );
+			if( OnEnemyFire != null )
+				OnEnemyFire();
 		}
 	}
 	#endregion
