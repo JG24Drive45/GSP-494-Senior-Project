@@ -65,6 +65,7 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the exit button" );
+			Application.Quit();
 			break;
 		case "BackButton":
 			if( onMouseClick != null )
