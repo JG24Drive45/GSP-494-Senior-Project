@@ -36,6 +36,7 @@ public class MenuButtonScript : MonoBehaviour
 				onMouseClick();
 			Debug.Log( "Clicked the play game button" );
 			PlayerSettingsScript.GetInstance.sceneNum = 0;
+			PlayerSettingsScript.GetInstance.openingSceneViewed = true;
 			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 

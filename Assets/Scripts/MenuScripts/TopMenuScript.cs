@@ -23,6 +23,16 @@ public class TopMenuScript : MonoBehaviour
 	}
 	#endregion
 
+	#region void Start()
+	void Start()
+	{
+		if( PlayerSettingsScript.GetInstance.openingSceneViewed )
+		{
+			InactivateTopMenu();
+		}
+	}
+	#endregion
+
 	#region public void InactivateTopMenu()
 	// Turns off button colliders
 	// dims the top menu

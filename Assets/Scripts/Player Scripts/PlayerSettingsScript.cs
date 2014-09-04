@@ -17,6 +17,7 @@ public class PlayerSettingsScript : MonoBehaviour
 	public bool[] levelStatus 	= new bool[10];
 
 	public int sceneNum			= 0;
+	public bool openingSceneViewed = false;
 
 	public enum PlayerState { MAINMENU, LEVEL, NARRATIVE, UPGRADE };
 	PlayerState state;
