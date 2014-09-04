@@ -87,7 +87,8 @@ public class DisplayNarration : MonoBehaviour
 	private string namePrivHans = "Private Hans Blau";
 	private string nameSpecHiroko = "Specialist Hiroko Tai";
 
-	//Level name shortcuts
+	//Narrative destination shortcuts
+	private string mainMenu = "MainMenu";
 	private string levelSelect = "LevelSelect";
 	private string level1 = "Level1";
 
@@ -256,7 +257,7 @@ public class DisplayNarration : MonoBehaviour
 			         "given a tour of the facility. You will go through a " +
 			         "basic training simulation as a team tomorrow at 0800 hours. You are " +
 			         "free until then. Do not be late. Dismissed.");
-			currentScene.destination = levelSelect;
+			currentScene.destination = mainMenu;
 			break;
 		case 1:
 			//Level 1 pre-scene
@@ -358,7 +359,7 @@ public class DisplayNarration : MonoBehaviour
 			        namePrivDakota,
 			        "We had too much of an advantage for that to be the worst, " +
 			        "but we’ll see when we really get into battle, I suppose.");
-			currentScene.destination = levelSelect;
+			currentScene.destination = mainMenu;
 			break;
 		}
 	}
