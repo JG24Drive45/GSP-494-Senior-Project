@@ -55,7 +55,7 @@ public class TopMenuScript : MonoBehaviour
 		}
 
 		StartCoroutine( "MoveMenuAway" );
-		StartCoroutine( GameObject.Find( "BottomMenu" ).GetComponent<BottomMenuScript>().MoveMenuOnScreen() );
+		GameObject.Find( "BottomMenu" ).GetComponent<BottomMenuScript>().MoveOnScreen();
 	}
 	#endregion
 
@@ -84,8 +84,10 @@ public class TopMenuScript : MonoBehaviour
 	#region public IEnumerator MoveMenuAway()
 	public IEnumerator MoveMenuAway()
 	{
+		Debug.Log( "Starting TOP menu coroutine" );
 		while( transform.position.x > inactivePos.x || transform.position.y < inactivePos.y )
 		{
+			Debug.Log( "TM Position: " + transform.position );
 			transform.position += ( moveSpeed * moveDirection * Time.deltaTime );
 			yield return null;
 		}

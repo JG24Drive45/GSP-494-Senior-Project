@@ -386,7 +386,8 @@ public class DisplayNarration : MonoBehaviour
 				}
 				else
 				{
-					Application.LoadLevel(currentScene.destination);
+					//Application.LoadLevel(currentScene.destination);
+					Application.LoadLevel( "MainMenu" );
 				}
 			}
 			if (Event.current.button == 1)

@@ -22,11 +22,18 @@ public class BottomMenuScript : MonoBehaviour
 	}
 	#endregion
 
+	public void MoveOnScreen()
+	{
+		StartCoroutine( "MoveMenuOnScreen" );
+	}
+
 	#region public IEnumerator MoveMenuOnScreen()
 	public IEnumerator MoveMenuOnScreen()
 	{
+		Debug.Log( "Starting BOTTOM menu coroutine" );
 		while( transform.position.x > desiredPos.x )
 		{
+			Debug.Log( "BM Position: " + transform.position );
 			transform.position += ( moveSpeed * moveDirection * Time.deltaTime );
 			yield return null;
 		}
