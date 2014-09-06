@@ -31,7 +31,8 @@ public class PlayerSettingsScript : MonoBehaviour
 			return instance;
 		}
 	}
-	
+
+	#region void Awake()
 	void Awake()
 	{
 		if( instance != null && instance != this )
@@ -46,7 +47,9 @@ public class PlayerSettingsScript : MonoBehaviour
 
 		DontDestroyOnLoad( this.gameObject );
 	}
+	#endregion
 
+	#region void Start()
 	void Start()
 	{
 		PlayerScript.OnLevelBeaten += SetLevelBeaten;
@@ -57,6 +60,7 @@ public class PlayerSettingsScript : MonoBehaviour
 			levelStatus[i] = false;
 		}
 	}
+	#endregion
 
 	void OnDestroy()
 	{

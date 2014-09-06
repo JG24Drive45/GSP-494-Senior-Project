@@ -105,6 +105,8 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the continue button" );
+			// Change time scale back to 1
+			Time.timeScale = 1.0f;
 			Application.LoadLevel( "Narrative Cutscene" );
 			break;
 		}
