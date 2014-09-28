@@ -29,15 +29,10 @@ class SceneNarration
 
 public class DisplayNarration : MonoBehaviour
 {
-	//Loads an image as needed (may be substituted for public Textures later)
-	private Texture GrabImg(string pFileName)
-	{
-		return (Texture)Resources.Load("Art/Character Profile Images/" + pFileName);
-	}
 	//Adds a piece of narrative to a scene
-	private void AddNarr(SceneNarration pScene, string pImg, string pSpeaker, string pNarration)
+	private void AddNarr(SceneNarration pScene, Texture pImg, string pSpeaker, string pNarration)
 	{
-		pScene.narration.Add (new NarrativePiece (GrabImg (pImg),
+		pScene.narration.Add (new NarrativePiece (pImg,
 		                                         pSpeaker,
 		                                         pNarration)
 		                      );
@@ -65,13 +60,14 @@ public class DisplayNarration : MonoBehaviour
 	private int narrativeIndex = 0;
 
 	//Profile image name shortcuts
-	private string imgBlank = "Craine Sprite";
-	private string imgDakotaGrey = "Craine Sprite";
-	private string imgCarsonWarringer = "Craine Sprite";
-	private string imgJoshHarbor = "Craine Sprite";
-	private string imgIsabellaIvanova = "Craine Sprite";
-	private string imgHansBlau = "Craine Sprite";
-	private string imgHirokoTai = "Craine Sprite";
+	public Texture imgBlank;
+	public Texture imgDakotaGrey;
+	public Texture imgCarsonWarringer;
+	public Texture imgJoshHarbor;
+	public Texture imgIsabellaIvanova;
+	public Texture imgHansBlau;
+	public Texture imgHirokoTai;
+	public Texture imgJenniferGreenheart;
 
 	//Character name shortcuts
 	private string nameMale = "Male ";
@@ -98,6 +94,11 @@ public class DisplayNarration : MonoBehaviour
 	void Awake ()
 	{
 		//Setting box dimensions
+		float width = 539;
+		float height = 404;
+		float originalRatio = width / height;
+		float currentRatio = (float)Screen.width / (float)Screen.height;
+		float ratioChange = currentRatio / originalRatio;
 		narrationBox.xMin = 0;
 		narrationBox.xMax = Screen.width;
 		narrationBox.yMin = (Screen.height - (Screen.height / 5));
@@ -106,19 +107,21 @@ public class DisplayNarration : MonoBehaviour
 		speakerBox.xMax = Screen.width - (Screen.width/4) - 1;
 		speakerBox.yMin = narrationBox.yMin - (Screen.height / 15);
 		speakerBox.yMax = speakerBox.yMin + (Screen.height / 20);
-		imageBox.xMin = Screen.width / 20;
-		imageBox.xMax = imageBox.xMin + (Screen.width / 5);
+		float profileWidth = 1324;
+		float profileHeight = 1648;
+		imageBox.xMin = 20;
 		imageBox.yMax = speakerBox.yMin;
-		imageBox.yMin = imageBox.yMax - (Screen.height / 2);
+		//This finds the ratio between the height of the profile image and the height space remaining
+		float profileToSpaceHeightRatio = profileHeight / (imageBox.yMax);
+		//Divide the profile's width and height by the height ratio to ensure the image fits the height space
+		//Height is used due to it being a taller than wide image
+		//The same ratio is used for both to maintain the aspect ratio of the image
+		imageBox.xMax = imageBox.xMin + (int)(profileWidth/(profileToSpaceHeightRatio));
+		imageBox.yMin = imageBox.yMax - (int)(profileHeight/(profileToSpaceHeightRatio));
 		skipBox.xMin = speakerBox.xMax + 1;
 		skipBox.xMax = Screen.width;
 		skipBox.yMin = speakerBox.yMin;
 		skipBox.yMax = speakerBox.yMax;
-		float width = 539;
-		float height = 404;
-		float originalRatio = width / height;
-		float currentRatio = (float)Screen.width / (float)Screen.height;
-		float ratioChange = currentRatio / originalRatio;
 		boxStyle.fontSize = (int)(boxStyle.fontSize * ratioChange);
 		//Skip box has same style to other boxes, but is centered
 		skipBoxStyle = new GUIStyle (boxStyle);
