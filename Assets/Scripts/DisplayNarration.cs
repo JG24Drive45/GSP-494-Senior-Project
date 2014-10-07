@@ -94,11 +94,6 @@ public class DisplayNarration : MonoBehaviour
 	void Awake ()
 	{
 		//Setting box dimensions
-		float width = 539;
-		float height = 404;
-		float originalRatio = width / height;
-		float currentRatio = (float)Screen.width / (float)Screen.height;
-		float ratioChange = currentRatio / originalRatio;
 		narrationBox.xMin = 0;
 		narrationBox.xMax = Screen.width;
 		narrationBox.yMin = (Screen.height - (Screen.height / 5));
@@ -122,7 +117,11 @@ public class DisplayNarration : MonoBehaviour
 		skipBox.xMax = Screen.width;
 		skipBox.yMin = speakerBox.yMin;
 		skipBox.yMax = speakerBox.yMax;
-		boxStyle.fontSize = (int)(boxStyle.fontSize * ratioChange);
+		float width = 539;
+		float height = 404;
+		float oldNewWidthRatio = width / (float)Screen.width;
+		float oldNewHeightRatio = height / (float)Screen.height;
+		boxStyle.fontSize = (int)(boxStyle.fontSize / oldNewHeightRatio);
 		//Skip box has same style to other boxes, but is centered
 		skipBoxStyle = new GUIStyle (boxStyle);
 		skipBoxStyle.alignment = TextAnchor.MiddleCenter;
