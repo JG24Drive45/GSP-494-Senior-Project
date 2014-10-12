@@ -36,6 +36,10 @@ public class EnemyBullet1 : MonoBehaviour
 		{
 			transform.Translate(distance * speed * Time.deltaTime, Space.World);
 		}
+		if( transform.position.x >= 7.0f || transform.position.x <= -5.0f || transform.position.y >= 4.0f || transform.position.y <= -5.0f)
+		{
+			Destroy( gameObject );
+		}
 	}
 
 	void SetDestination()
