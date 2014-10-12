@@ -112,6 +112,7 @@ public class Enemy1AI : MonoBehaviour
 		switch( other.gameObject.tag )
 		{
 		case "PlayerBullet":
+			Destroy( other.gameObject );
 			TakeDamage();
 			break;
 		}
