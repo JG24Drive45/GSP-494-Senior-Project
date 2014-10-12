@@ -67,8 +67,8 @@ public class PlayerScript : MonoBehaviour
 			transform.position = new Vector3( 6.0f, transform.position.y, 0.0f );
 		else if( transform.position.y < -4.3f )
 			transform.position = new Vector3( transform.position.x, -4.3f, 0.0f );
-		else if( transform.position.y > 2.0f )
-			transform.position = new Vector3( transform.position.x, 2.0f, 0.0f );
+		else if( transform.position.y > 4.0f )
+			transform.position = new Vector3( transform.position.x, 4.0f, 0.0f );
 
 		// Did the player shoot?
 		if( Input.GetKey( KeyCode.Space ) && bCanShoot )
