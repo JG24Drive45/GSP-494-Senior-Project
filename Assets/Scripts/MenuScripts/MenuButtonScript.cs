@@ -39,10 +39,6 @@ public class MenuButtonScript : MonoBehaviour
 			PlayerSettingsScript.GetInstance.openingSceneViewed = true;
 			Application.LoadLevel( "Narrative Cutscene" );
 			break;
-
-
-
-
 		case "LoadGameButton":
 			if( onMouseClick != null )
 				onMouseClick();
@@ -51,9 +47,6 @@ public class MenuButtonScript : MonoBehaviour
 			// needs to bring out the submenu
 			GameObject.Find( "TopMenu" ).GetComponent<TopMenuScript>().InactivateTopMenu();
 			break;
-
-
-
 		case "InstructionsButton":
 			if( onMouseClick != null )
 				onMouseClick();
@@ -76,7 +69,7 @@ public class MenuButtonScript : MonoBehaviour
 			if( onMouseClick != null )
 				onMouseClick();
 			Debug.Log( "Clicked the upgrades button" );
-			// TODO: go to the upgrades scene
+			Application.LoadLevel( "Upgrades" );
 			break;
 		case "LevelButton":
 			if( onMouseClick != null )
