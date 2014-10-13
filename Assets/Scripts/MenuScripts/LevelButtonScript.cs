@@ -47,7 +47,23 @@ public class LevelButtonScript : MonoBehaviour
 			switch( this.gameObject.name )
 			{
 			case "Level1Button":
-				Debug.Log( "Clicked Level 1 Buton" );
+				Debug.Log( "Clicked Level 1 Button" );
+				PlayerSettingsScript.GetInstance.levelNum = levelNum;
+				PlayerSettingsScript.GetInstance.levelTime = levelTime;
+				PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2 - 1;
+				Application.LoadLevel( "Narrative Cutscene" );
+				break;
+
+			case "Level2Button":
+				Debug.Log( "Clicked Level 2 Button" );
+				PlayerSettingsScript.GetInstance.levelNum = levelNum;
+				PlayerSettingsScript.GetInstance.levelTime = levelTime;
+				PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2 - 1;
+				Application.LoadLevel( "Narrative Cutscene" );
+				break;
+
+			case "Level3Button":
+				Debug.Log( "Clicked Level 2 Button" );
 				PlayerSettingsScript.GetInstance.levelNum = levelNum;
 				PlayerSettingsScript.GetInstance.levelTime = levelTime;
 				PlayerSettingsScript.GetInstance.sceneNum = PlayerSettingsScript.GetInstance.levelNum * 2 - 1;
