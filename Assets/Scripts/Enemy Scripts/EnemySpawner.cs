@@ -6,6 +6,10 @@ public class EnemySpawner : MonoBehaviour
 {
 	public int xMin;
 	public int xMax;
+
+	public int eMin;		// min enemies purpose used for deciding which enemies to spawn
+	public int eMax;		// max enemies purpose used for deciding which enemies to spawn
+
 	public GameObject Enemy1;
 	public GameObject Enemy2;
 	public GameObject Enemy3;
@@ -16,15 +20,18 @@ public class EnemySpawner : MonoBehaviour
 	public bool spawnEnemies;
 
 	public HUDScript _HUDScript;
+	public PlayerSettingsScript _PlayerSettingsScript;
 	public Camera myCamera;
 
 	void Start () 
 	{
 		_HUDScript = GameObject.Find( "HUD" ).GetComponent< HUDScript >();		// Get the player script to check the health of player
+		_PlayerSettingsScript = GameObject.Find( "PlayerSettings" ).GetComponent< PlayerSettingsScript >();
 		spawnEnemies = true;
 		enemyToSpawn = 0;
 		xMin = 25;
 		xMax = Screen.width;
+		GetEnemiesToSpawn();
 		StartCoroutine( "SpawnEnemies" );
 	}
 
@@ -37,11 +44,42 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
+	private void GetEnemiesToSpawn()
+	{
+		int currentLevel = _PlayerSettingsScript.levelNum;
+
+		switch( currentLevel )
+		{
+		case 1:
+			eMin = 1;
+			eMax = 1;
+			break;
+
+		case 2:
+			eMin = 1;
+			eMax = 2;
+			break;
+
+		case 3:
+			eMin = 1;
+			eMax = 3;
+			break;
+
+		case 4:
+			eMin = 1;
+			eMax = 4;
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	public IEnumerator SpawnEnemies()
 	{
 		while( spawnEnemies )
 		{
-			enemyToSpawn = Random.Range(1,4);		// Select which enemy to create
+			enemyToSpawn = Random.Range( eMin, eMax);		// Select which enemy to create
 			//enemyToSpawn = 2;						// Uncomment to test a specific enemy
 
 			switch( enemyToSpawn )
