@@ -19,7 +19,8 @@ public class MenuTextScript : MonoBehaviour
 	private string currentText = "";								// Current letters being displayed on screen
 	private string currentBlackText = "";
 
-	private const float fontSizeRate = 0.075f;						// Use for calculating the font size based on screen height
+	private const float fontSizeRate = 0.06f;						// Use for calculating the font size based on screen height
+	private const float insFontRate = 0.04f;						// Use for calculating the font size of instructions
 
 	private Rect whiteTextRect;										// Rect for foreground text
 	private Rect blackTextRect;										// Rect for drop shadow text
@@ -34,42 +35,61 @@ public class MenuTextScript : MonoBehaviour
 					  	"Jordan Huffman - Enemy & AI Programmer\n" +
 						"Eric Huntzberry - Sound & Narration Programmer\n\n" +
 						"Special thanks to Matt Devlin\n" +
-						"for Main Menu and HUD artwork";
+						"for Main Menu and HUD artwork\n" +
+						"and to Brittany McCullough for\n" +
+						"character and title art";
 		// Instructions
 		menuText[1] = 	"Use the arrow or WASD\n" +
 						"keys to move your ship\n\n" +
 						"Use the spacebar\n" +
 						"to shoot\n\n" +
-						"Collect debris along the way";
-
-		switch( this.gameObject.name )
-		{
-		case "CreditsMenuText":
-			text = menuText[0];
-			break;
-
-		case "InstructionsMenuText":
-			text = menuText[1];
-			break;
-		}
-
-		// Cache length of the text string
-		textLength = text.Length;
+						"Collect debris along the way\n\n" +
+						"Primary-click on the box of dialogue to go forward by one frame\n" +
+						"Alt-click on the box of dialogue to go back by one frame\n" +
+						"Primary-click on the Skip box to skip to the scene's last frame";
 
 		// Cache resolution
 		int width = Screen.width;
 		int height = Screen.height;
 
-		// Calculate the font size
-		guiStyle.fontSize = (int)( height * fontSizeRate );
+		switch( this.gameObject.name )
+		{
+		case "CreditsMenuText":
+			text = menuText[0];
+			// Cache length of the text string
+			textLength = text.Length;
+			
+			// Calculate the font size
+			guiStyle.fontSize = (int)( height * fontSizeRate );
+			
+			// Set font weight
+			guiStyle.fontStyle = FontStyle.Normal;
+			
+			// Used for drop shadow
+			blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 155, 105 );
+			// Use for foreground text
+			whiteTextRect = new Rect( width / 2 - 75, height / 2 - 50, 150, 100 );
+			break;
 
-		// Set font weight
-		guiStyle.fontStyle = FontStyle.Normal;
+		case "InstructionsMenuText":
+			text = menuText[1];
+			// Cache length of the text string
+			textLength = text.Length;
+			
+			// Calculate the font size
+			guiStyle.fontSize = (int)( height * insFontRate );
+			
+			// Set font weight
+			guiStyle.fontStyle = FontStyle.Normal;
+			
+			// Used for drop shadow
+			blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 155, 105 );
+			// Use for foreground text
+			whiteTextRect = new Rect( width / 2 - 75, height / 2 - 50, 150, 100 );
+			break;
+		}
 
-		// Used for drop shadow
-		blackTextRect = new Rect( width / 2 - 75, height / 2 - 50, 155, 105 );
-		// Use for foreground text
-		whiteTextRect = new Rect( width / 2 - 75, height / 2 - 50, 150, 100 );
+
 	}
 	#endregion
 

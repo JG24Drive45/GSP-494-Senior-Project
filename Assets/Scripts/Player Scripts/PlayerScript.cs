@@ -93,6 +93,8 @@ public class PlayerScript : MonoBehaviour
 					PlayerSettingsScript.GetInstance.totalScore += OnGetPointsVal();
 				if( OnGetDebrisVal != null )
 					PlayerSettingsScript.GetInstance.totalDebris += OnGetDebrisVal();
+				// Update the amount of upgrade points the player has
+				PlayerSettingsScript.GetInstance.upgradePoints = PlayerSettingsScript.GetInstance.totalScore / 2000;
 				// Pause the game
 				Time.timeScale = 0.0f;			
 				// Bring up the end level menu
