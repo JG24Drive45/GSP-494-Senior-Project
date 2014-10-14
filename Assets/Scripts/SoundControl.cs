@@ -27,13 +27,19 @@ using System.Collections;
 
 public class SoundControl : MonoBehaviour 
 {
+	public AudioSource sounds;
+	public AudioSource loopingBGM;
+
 	private static SoundControl instance = null;
 	
 	public AudioClip onHover;
 	public AudioClip onClick;
 	public AudioClip playerBulletFire;
 	public AudioClip enemyBulletFire;
-	
+	public AudioClip menuBGM;
+	public AudioClip levelBGM;
+	public AudioClip narrationBGM;
+
 	public static SoundControl GetInstance
 	{
 		get
@@ -56,6 +62,13 @@ public class SoundControl : MonoBehaviour
 		
 		DontDestroyOnLoad( this.gameObject );
 
+		AudioSource[] aSources = GetComponents<AudioSource> ();
+		
+		sounds = aSources[0];
+		loopingBGM = aSources[1];
+
+		loopingBGM.loop = true;
+
 		// Subscribe to events
 		MenuButtonScript.onMouseOver += PlayOnHover;
 		MenuButtonScript.onMouseClick += PlayOnClick;
@@ -63,6 +76,8 @@ public class SoundControl : MonoBehaviour
 		Enemy1AI.OnEnemyFire += PlayEnemyFire;
 		Enemy2AI.OnEnemyFire += PlayEnemyFire;
 		Enemy3AI.OnEnemyFire += PlayEnemyFire;
+
+		PlayMenuBGM ();
 	}
 
 	void OnDestroy()
@@ -77,21 +92,45 @@ public class SoundControl : MonoBehaviour
 
 	void PlayOnHover()
 	{
-		audio.PlayOneShot( onHover );
+		sounds.PlayOneShot( onHover );
 	}
 
 	void PlayOnClick()
 	{
-		audio.PlayOneShot( onClick );
+		sounds.PlayOneShot( onClick );
 	}
 
 	void PlayPlayerFire()
 	{
-		audio.PlayOneShot (playerBulletFire);
+		sounds.PlayOneShot (playerBulletFire);
 	}
 
 	void PlayEnemyFire()
 	{
-		audio.PlayOneShot( enemyBulletFire );
+		sounds.PlayOneShot( enemyBulletFire );
+	}
+
+	void PlayMenuBGM()
+	{
+		if (loopingBGM.isPlaying)
+			loopingBGM.Stop ();
+		loopingBGM.clip = menuBGM;
+		loopingBGM.Play ();
+	}
+
+	void PlayLevelBGM()
+	{
+		if (loopingBGM.isPlaying)
+			loopingBGM.Stop ();
+		loopingBGM.clip = levelBGM;
+		loopingBGM.Play ();
+	}
+
+	void PlayNarrativeBGM()
+	{
+		if (loopingBGM.isPlaying)
+			loopingBGM.Stop ();
+		loopingBGM.clip = narrationBGM;
+		loopingBGM.Play ();
 	}
 }
