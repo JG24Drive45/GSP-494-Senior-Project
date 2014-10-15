@@ -45,6 +45,7 @@ public class MenuButtonScript : MonoBehaviour
 			Debug.Log( "Clicked the load game button" );
 
 			// needs to bring out the submenu
+			PlayerSettingsScript.GetInstance.openingSceneViewed = true;
 			GameObject.Find( "TopMenu" ).GetComponent<TopMenuScript>().InactivateTopMenu();
 			break;
 		case "InstructionsButton":
