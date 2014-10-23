@@ -91,6 +91,8 @@ public class UpgradesScript : MonoBehaviour
 			PlayerSettingsScript.GetInstance.shipSpeed = upgradeVars.tempSpeed;
 			PlayerSettingsScript.GetInstance.weaponStrength = upgradeVars.tempStrength;
 			PlayerSettingsScript.GetInstance.totalScore -= ( upgradeVars.pointsUsed * 2000 );
+			// Update the amount of upgrade points the player has
+			PlayerSettingsScript.GetInstance.upgradePoints = PlayerSettingsScript.GetInstance.totalScore / 2000;
 			break;
 		}
 	}

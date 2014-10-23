@@ -63,12 +63,12 @@ public class PlayerScript : MonoBehaviour
 		// Bounds Checking
 		if( transform.position.x < -6.0f )
 			transform.position = new Vector3( -6.0f, transform.position.y, 0.0f );
-		else if( transform.position.x > 6.0f )
+		if( transform.position.x > 6.0f )
 			transform.position = new Vector3( 6.0f, transform.position.y, 0.0f );
-		else if( transform.position.y < -4.3f )
+		if( transform.position.y < -4.3f )
 			transform.position = new Vector3( transform.position.x, -4.3f, 0.0f );
-		else if( transform.position.y > 4.0f )
-			transform.position = new Vector3( transform.position.x, 4.0f, 0.0f );
+		if( transform.position.y > 4.3f )
+			transform.position = new Vector3( transform.position.x, 4.3f, 0.0f );
 
 		// Did the player shoot?
 		if( Input.GetKey( KeyCode.Space ) && bCanShoot )
@@ -134,7 +134,7 @@ public class PlayerScript : MonoBehaviour
 
 			// Take Damage
 			if( OnEnemyCollision != null )
-				OnEnemyCollision( 0.5f );
+				OnEnemyCollision( 0.25f );
 
 			break;
 		case "Debris":
