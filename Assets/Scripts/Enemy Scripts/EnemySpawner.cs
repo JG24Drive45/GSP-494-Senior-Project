@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		while( spawnEnemies )
 		{
-			enemyToSpawn = Random.Range( eMin, eMax);		// Select which enemy to create
+			enemyToSpawn = Random.Range( eMin, eMax + 1);		// Select which enemy to create
 			//enemyToSpawn = 2;						// Uncomment to test a specific enemy
 
 			switch( enemyToSpawn )
