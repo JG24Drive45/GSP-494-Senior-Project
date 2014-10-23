@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
 		_HUDScript = GameObject.Find( "HUD" ).GetComponent< HUDScript >();		// Get the player script to check the health of player
 		_PlayerSettingsScript = GameObject.Find( "PlayerSettings" ).GetComponent< PlayerSettingsScript >();
 		spawnEnemies = true;
-		enemyToSpawn = 0;
 		xMin = 25;
 		xMax = Screen.width;
 		GetEnemiesToSpawn();
@@ -47,26 +46,23 @@ public class EnemySpawner : MonoBehaviour
 	private void GetEnemiesToSpawn()
 	{
 		int currentLevel = _PlayerSettingsScript.levelNum;
+		eMin = 1;
 
 		switch( currentLevel )
 		{
 		case 1:
-			eMin = 1;
 			eMax = 1;
 			break;
 
 		case 2:
-			eMin = 1;
 			eMax = 2;
 			break;
 
 		case 3:
-			eMin = 1;
 			eMax = 3;
 			break;
 
 		case 4:
-			eMin = 1;
 			eMax = 4;
 			break;
 
