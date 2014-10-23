@@ -17,14 +17,26 @@ public class ToggleSoundScript : MonoBehaviour
 
 	void OnMouseUp()
 	{
+		AudioSource[] aud;
+
 		switch( gameObject.name )
 		{
 		case "OnButton":
-			GameObject.Find( "SoundManager" ).audio.volume = 1.0f;
+			//GameObject.Find( "SoundManager" ).audio.volume = 1.0f;
+			aud = GameObject.Find( "SoundManager" ).GetComponents<AudioSource>();
+			foreach( AudioSource source in aud )
+			{
+				source.volume = 1.0f;
+			}
 			Debug.Log( "ON" );
 			break;
 		case "OffButton":
-			GameObject.Find( "SoundManager" ).audio.volume = 0.0f;
+			//GameObject.Find( "SoundManager" ).audio.volume = 0.0f;
+			aud = GameObject.Find( "SoundManager" ).GetComponents<AudioSource>();
+			foreach( AudioSource source in aud )
+			{
+				source.volume = 0.0f;
+			}
 			Debug.Log( "OFF" );
 			break;
 		}
