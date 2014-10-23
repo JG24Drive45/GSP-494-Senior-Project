@@ -596,24 +596,6 @@ public class DisplayNarration : MonoBehaviour
 			currentScene.destination = level6;
 			break;
 		case 12:
-			if (PlayerSettingsScript.totalDebris <= 60000)
-			{
-				AddNarr (currentScene,
-				         charNarrator,
-				         "Without gathering enough scrap, the disease overcame humanity. It was too late now. " +
-				         "No amount of X01 would save us. The governments of the Federation took what they had gained " +
-				         "and isolated themselves from the infected to let them die without risk of it spreading. " +
-				         "The war was for nothing.");
-			}
-			else
-			{
-				AddNarr(currentScene,
-				        charNarrator,
-				        "With the amount of scrap gathered, the governments of the Federation were able to " +
-				        "create enough of the cure to eradicate the disease. Your family was saved. Your friends " +
-				        "were saved. In the process, your comrade died. Many more died without you ever meeting them. " +
-				        "The enemy, or target, or whatever they were - they died, too. Was it all worth it?");
-			}
 			currentScene.destination = mainMenu;
 			break;
 		}
