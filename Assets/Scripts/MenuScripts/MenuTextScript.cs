@@ -30,8 +30,7 @@ public class MenuTextScript : MonoBehaviour
 	void Awake()
 	{
 		// Credits
-		menuText[0] = 	"Kurt Eastabrooks - Gameplay Programmer\n" +
-					  	"Jill Gray - Main Menu & GUI Programmer\n" +
+		menuText[0] = 	"Jill Gray - Main Menu, GUI, and Gameplay Programmer\n" +
 					  	"Jordan Huffman - Enemy & AI Programmer\n" +
 						"Eric Huntzberry - Sound & Narration Programmer\n\n" +
 						"Special thanks to Matt Devlin\n" +
