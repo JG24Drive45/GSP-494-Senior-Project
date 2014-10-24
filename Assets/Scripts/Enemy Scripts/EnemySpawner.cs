@@ -47,27 +47,29 @@ public class EnemySpawner : MonoBehaviour
 	{
 		int currentLevel = _PlayerSettingsScript.levelNum;
 		eMin = 1;
-
-		switch( currentLevel )
+		if( currentLevel <= 3 )
 		{
-		case 1:
-			eMax = 1;
-			break;
+			switch( currentLevel )
+			{
+			case 1:
+				eMax = 1;
+				break;
 
-		case 2:
-			eMax = 2;
-			break;
+			case 2:
+				eMax = 2;
+				break;
 
-		case 3:
+			case 3:
+				eMax = 3;
+				break;
+
+			default:
+				break;
+			}
+		}
+		else
+		{
 			eMax = 3;
-			break;
-
-		case 4:
-			eMax = 4;
-			break;
-
-		default:
-			break;
 		}
 	}
 
